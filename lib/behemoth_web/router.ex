@@ -8,4 +8,13 @@ defmodule BehemothWeb.Router do
   scope "/api", BehemothWeb do
     pipe_through :api
   end
+
+  def swagger_info do
+    %{
+      info: %{
+        version: "1.0",
+        title: "Behemoth"
+      }
+    }
+  end
 end
