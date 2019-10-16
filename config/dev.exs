@@ -39,8 +39,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :behemoth, Behemoth.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "behemoth",
+  password: "behemoth",
   database: "behemoth_dev",
   hostname: "localhost",
   pool_size: 10
