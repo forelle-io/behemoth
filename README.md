@@ -1,19 +1,28 @@
-# Behemoth
+# 🎣 Behemoth - Forelle API Web Server
 
-To start your Phoenix server:
+<p align="center">
+    <img width="250" src="https://github.com/forelle-io/jish/raw/master/static/logos/Forelle.io.png">
+</p>
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Start Phoenix endpoint with `mix phx.server`
+API-приложение на [Elixir](https://elixir-lang.org/) и [Phoenix](https://phoenixframework.org/) для организации проведения рыбалок и кооперации между собой людей, интересующихся ловлей рыбы.
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## Зависимости
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+* Erlang/OTP 21
+* Elixir 1.8.1
+* PostgreSQL 10.9
+* Edeliver
 
-## Learn more
+### Запуск локального сервера
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+Запуск сервера в режиме разработки
+```shell
+mix phx.server
+```
+
+## Тестирование
+
+Unit-тестирование:
+```shell
+mix test
+```
