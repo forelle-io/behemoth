@@ -33,13 +33,25 @@ defmodule Behemoth.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.3.4"},
-      {:phoenix_pubsub, "~> 1.0"},
-      {:phoenix_ecto, "~> 3.2"},
-      {:phoenix_swagger, "~> 0.8"},
+      # Phoenix зависимости
+      {:phoenix, "~> 1.4.9"},
+      {:phoenix_pubsub, "~> 1.1"},
+      {:phoenix_ecto, "~> 4.0"},
+      {:phoenix_swagger,
+       git: "https://github.com/xerions/phoenix_swagger.git", branch: "possibly-return-json-response-from-swagger-ui"},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      # Базы данных
+      {:ecto_sql, "~> 3.1"},
       {:postgrex, ">= 0.0.0"},
+      # I18N
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      # Сервера
+      {:plug_cowboy, "~> 2.0"},
+      # Протоколы, форматы
+      {:jason, "~> 1.0"},
+      {:decimal, "~> 1.8.0"},
+      # Линтеры
+      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -53,7 +65,7 @@ defmodule Behemoth.Mixfile do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      "test": ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end
 end
