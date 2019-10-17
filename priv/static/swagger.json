@@ -1,9 +1,41 @@
 {
   "swagger": "2.0",
-  "paths": {},
+  "securityDefinitions": {
+    "api_auth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/api/v1/auth/ping": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "",
+        "responses": {
+          "401": {
+            "description": {
+              "error": "Correct auth token must be provided."
+            }
+          },
+          "200": {
+            "description": {
+              "message": "pong"
+            }
+          }
+        },
+        "parameters": [],
+        "operationId": "BehemothWeb.Api.V1.Auth.AuthController.ping",
+        "description": "Проверка валидности доступа к закрытым токеном функциям  API"
+      }
+    }
+  },
   "info": {
     "version": "1.0",
-    "title": "Behemoth"
+    "title": "Behemoth API",
+    "description": "## Возможности: описание скоро будет доступно\n"
   },
   "definitions": {}
 }
