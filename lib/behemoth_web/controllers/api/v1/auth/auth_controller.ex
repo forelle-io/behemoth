@@ -12,5 +12,6 @@ defmodule BehemothWeb.Api.V1.Auth.AuthController do
     response(code(:unauthorized), %{"error" => "Correct auth token must be provided."})
   end
 
+  @spec ping(Conn.t, map) :: Conn.t
   def ping(%Plug.Conn{} = conn, _params), do: json(conn, %{"message" => "pong"})
 end

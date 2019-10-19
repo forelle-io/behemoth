@@ -33,6 +33,6 @@ defmodule Behemoth.Contexts.Account.User do
   def update_changeset(user, attrs) do
     user
     |> cast(attrs, [:birthday, :gender, :first_name, :last_name])
-    |> validate_required([:phone, :birthday, :gender, :first_name, :last_name])
+    |> validate_required([:phone])
   end
 end

@@ -9,6 +9,10 @@ defmodule BehemothWeb.Router do
     pipe_through :api
 
     scope "/v1", V1, as: :v1 do
+      scope "/account", Account, as: :account do
+        resources "/users", UserController
+      end
+
       scope "/auth", Auth, as: :auth do
         get "/ping", AuthController, :ping
       end

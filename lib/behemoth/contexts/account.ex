@@ -13,6 +13,16 @@ defmodule Behemoth.Contexts.Account do
 
   def get_user!(id), do: Repo.get!(User, id)
 
+  def get_user(id) do
+    case Repo.get(User, id) do
+      %User{} = user ->
+        user
+
+      nil ->
+        {:error, :not_found}
+    end
+  end
+
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.create_changeset(attrs)
