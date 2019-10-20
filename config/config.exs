@@ -14,8 +14,7 @@ config :behemoth, BehemothWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "PIAJ+0L6UoL7aSHsLVxuX5j+RPHmCdpUZ3at+fGBKvh3WpMSk7VQAYW9lfdsqy+S",
   render_errors: [view: BehemothWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: Behemoth.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Behemoth.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -32,4 +31,4 @@ config :behemoth, :phoenix_swagger,
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

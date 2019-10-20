@@ -1,4 +1,6 @@
 defmodule Behemoth.Application do
+  @moduledoc false
+
   use Application
 
   # See https://hexdocs.pm/elixir/Application.html
@@ -11,7 +13,7 @@ defmodule Behemoth.Application do
       # Start the Ecto repository
       supervisor(Behemoth.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(BehemothWeb.Endpoint, []),
+      supervisor(BehemothWeb.Endpoint, [])
       # Start your own worker by calling: Behemoth.Worker.start_link(arg1, arg2, arg3)
       # worker(Behemoth.Worker, [arg1, arg2, arg3]),
     ]

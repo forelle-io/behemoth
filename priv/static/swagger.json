@@ -30,6 +30,187 @@
         "operationId": "BehemothWeb.Api.V1.Auth.AuthController.ping",
         "description": "Проверка валидности доступа к закрытым токеном функциям  API"
       }
+    },
+    "/api/v1/account/users/{id}": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "",
+        "responses": {},
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "Id пользователя"
+          },
+          {
+            "type": "date",
+            "required": false,
+            "name": "user[first_name]",
+            "in": "formData",
+            "description": "Имя"
+          },
+          {
+            "type": "date",
+            "required": false,
+            "name": "user[birthday]",
+            "in": "formData",
+            "description": "Фамилия"
+          },
+          {
+            "type": "date",
+            "required": false,
+            "name": "user[birthday]",
+            "in": "formData",
+            "description": "Дата рождения"
+          }
+        ],
+        "operationId": "BehemothWeb.Api.V1.Account.UserController.update",
+        "description": "Обновление пользователя",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ]
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "",
+        "responses": {
+          "200": {
+            "description": {
+              "data": {
+                "user": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "Id пользователя"
+          }
+        ],
+        "operationId": "BehemothWeb.Api.V1.Account.UserController.show",
+        "description": "Получение информации о пользователе"
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "",
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "Id пользователя"
+          }
+        ],
+        "operationId": "BehemothWeb.Api.V1.Account.UserController.delete",
+        "description": "Удаление пользователя"
+      }
+    },
+    "/api/v1/account/users": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "",
+        "responses": {
+          "201": {
+            "description": {
+              "data": {
+                "user": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "user[phone]",
+            "in": "formData",
+            "description": "Телефон"
+          },
+          {
+            "type": "string",
+            "required": false,
+            "name": "user[first_name]",
+            "in": "formData",
+            "description": "Имя"
+          },
+          {
+            "type": "string",
+            "required": false,
+            "name": "user[last_name]",
+            "in": "formData",
+            "description": "Фамилия"
+          },
+          {
+            "type": "integer",
+            "required": false,
+            "name": "user[gender]",
+            "in": "formData",
+            "description": "Пол"
+          },
+          {
+            "type": "date",
+            "required": false,
+            "name": "user[birthday]",
+            "in": "formData",
+            "description": "Дата рождения"
+          }
+        ],
+        "operationId": "BehemothWeb.Api.V1.Account.UserController.create",
+        "description": "Создание пользователя",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ]
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "",
+        "responses": {
+          "200": {
+            "description": {
+              "data": {
+                "users": {
+                  "$ref": "#/definitions/Users"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [],
+        "operationId": "BehemothWeb.Api.V1.Account.UserController.index",
+        "description": "Список пользователей"
+      }
     }
   },
   "info": {
@@ -37,5 +218,69 @@
     "title": "Behemoth API",
     "description": "## Возможности: описание скоро будет доступно\n"
   },
-  "definitions": {}
+  "definitions": {
+    "Users": {
+      "type": "array",
+      "title": "Account.Users",
+      "items": {
+        "$ref": "#/definitions/User"
+      },
+      "description": "Список пользователей"
+    },
+    "User": {
+      "type": "object",
+      "title": "Account.User",
+      "required": [
+        "updated_at",
+        "inserted_at",
+        "phone",
+        "id"
+      ],
+      "properties": {
+        "updated_at": {
+          "type": "timestamp",
+          "description": "Дата и время обновления"
+        },
+        "phone": {
+          "type": "integer",
+          "description": "Телефон"
+        },
+        "last_name": {
+          "type": "string",
+          "description": "Фамилия"
+        },
+        "inserted_at": {
+          "type": "timestamp",
+          "description": "Дата и время создания"
+        },
+        "id": {
+          "type": "integer",
+          "description": "Id"
+        },
+        "gender": {
+          "type": "string",
+          "description": "Пол"
+        },
+        "first_name": {
+          "type": "string",
+          "description": "Имя"
+        },
+        "birthday": {
+          "type": "date",
+          "description": "Дата рождения"
+        }
+      },
+      "example": {
+        "updated_at": "2019-05-31 08:34:17",
+        "phone": 79999999999,
+        "last_name": "Solovyev",
+        "inserted_at": "2019-05-31 08:33:46",
+        "id": 1,
+        "gender": "male",
+        "first_name": "Alexey",
+        "birthday": "1994-05-03"
+      },
+      "description": "Пользователь"
+    }
+  }
 }
