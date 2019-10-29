@@ -14,5 +14,7 @@ defmodule BehemothWeb.ErrorView do
     %{errors: %{detail: Phoenix.Controller.status_message_from_template(template)}}
   end
 
-  def render("404.json", _params), do: %{errors: "Not found"}
+  def render("401.json", _params), do: %{errors: "unauthorized"}
+  def render("403.json", _params), do: %{errors: "forbidden"}
+  def render("404.json", _params), do: %{errors: "not found"}
 end
