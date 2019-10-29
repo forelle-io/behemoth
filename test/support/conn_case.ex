@@ -26,13 +26,13 @@ defmodule BehemothWeb.ConnCase do
     end
   end
 
-
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Behemoth.Repo)
+
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(Behemoth.Repo, {:shared, self()})
     end
+
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
-
 end

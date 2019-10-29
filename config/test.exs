@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :behemoth, Behemoth.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "behemoth",
+  password: "behemoth",
   database: "behemoth_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

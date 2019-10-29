@@ -36,7 +36,7 @@ defmodule Begemoth.Contexts.Auth.SmsCode do
     from sms_code in SmsCode,
       where:
         sms_code.struct_type == ^struct_type and
-        sms_code.struct_id == ^struct_id,
+          sms_code.struct_id == ^struct_id,
       order_by: [desc: sms_code.id],
       limit: 1
   end

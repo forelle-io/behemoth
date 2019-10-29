@@ -6,11 +6,11 @@ defmodule BehemothWeb.ErrorViewTest do
 
   test "renders 404.json" do
     assert render(BehemothWeb.ErrorView, "404.json", []) ==
-           %{errors: %{detail: "Not Found"}}
+             %{errors: "not found"}
   end
 
   test "renders 500.json" do
     assert render(BehemothWeb.ErrorView, "500.json", []) ==
-           %{errors: %{detail: "Internal Server Error"}}
+             %{errors: %{detail: "Internal Server Error"}}
   end
 end
