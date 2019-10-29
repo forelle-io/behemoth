@@ -13,12 +13,14 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
 
   swagger_path :index do
     get("/api/v1/account/users")
+
+    tag("Account.User")
     description("Список пользователей")
 
     response(code(:ok), %{"data" => %{"users" => Schema.ref(:Users)}})
   end
 
-  @spec index(Conn.t, map) :: Conn.t
+  @spec index(Conn.t(), map) :: Conn.t()
   def index(conn, _params) do
     users = Account.list_users()
     render(conn, "index.json", users: users)
@@ -26,6 +28,8 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
 
   swagger_path :create do
     post("/api/v1/account/users")
+
+    tag("Account.User")
     description("Создание пользователя")
 
     consumes("application/x-www-form-urlencoded")
@@ -40,7 +44,7 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     response(code(:created), %{"data" => %{"user" => Schema.ref(:User)}})
   end
 
-  @spec create(Conn.t, map) :: Conn.t
+  @spec create(Conn.t(), map) :: Conn.t()
   def create(conn, %{"user" => user_params}) do
     with {:ok, %User{} = user} <- Account.create_user(user_params) do
       conn
@@ -51,7 +55,9 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
 
   swagger_path :update do
     put("/api/v1/account/users/{id}")
-    description "Обновление пользователя"
+
+    tag("Account.User")
+    description("Обновление пользователя")
 
     consumes("application/x-www-form-urlencoded")
     produces("application/json")
@@ -62,16 +68,18 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     parameter(:"user[birthday]", :formData, :date, "Дата рождения")
   end
 
-  @spec create(Conn.t, map) :: Conn.t
+  @spec create(Conn.t(), map) :: Conn.t()
   def update(conn, %{"id" => id, "user" => user_params}) do
     with %User{} = user <- Account.get_user(id),
-        {:ok, %User{} = user} <- Account.update_user(user, user_params) do
+         {:ok, %User{} = user} <- Account.update_user(user, user_params) do
       render(conn, "show.json", user: user)
     end
   end
 
   swagger_path :show do
     get("/api/v1/account/users/{id}")
+
+    tag("Account.User")
     description("Получение информации о пользователе")
 
     parameter(:id, :path, :integer, "Id пользователя", required: true)
@@ -79,7 +87,7 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     response(code(:ok), %{"data" => %{"user" => Schema.ref(:User)}})
   end
 
-  @spec show(Conn.t, map) :: Conn.t
+  @spec show(Conn.t(), map) :: Conn.t()
   def show(conn, %{"id" => id}) do
     with %User{} = user <- Account.get_user(id) do
       render(conn, "show.json", user: user)
@@ -87,6 +95,7 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
   end
 
   swagger_path :delete do
+    tag("Account.User")
     description("Удаление пользователя")
 
     parameter(:id, :path, :integer, "Id пользователя", required: true)
@@ -94,10 +103,10 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     response(code(:no_content), "")
   end
 
-  @spec delete(Conn.t, map) :: Conn.t
+  @spec delete(Conn.t(), map) :: Conn.t()
   def delete(conn, %{"id" => id}) do
     with %User{} = user <- Account.get_user(id),
-        {:ok, %User{}} <- Account.delete_user(user) do
+         {:ok, %User{}} <- Account.delete_user(user) do
       send_resp(conn, :no_content, "")
     end
   end

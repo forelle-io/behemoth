@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "securityDefinitions": {
-    "api_auth": {
+    "Bearer": {
       "type": "apiKey",
       "name": "Authorization",
       "in": "header"
@@ -11,7 +11,7 @@
     "/api/v1/auth/ping": {
       "get": {
         "tags": [
-          "Auth"
+          "Auth.Authenticate"
         ],
         "summary": "",
         "responses": {
@@ -27,14 +27,14 @@
           }
         },
         "parameters": [],
-        "operationId": "BehemothWeb.Api.V1.Auth.AuthController.ping",
+        "operationId": "BehemothWeb.Api.V1.Auth.AuthenticateController.ping",
         "description": "Проверка валидности доступа к закрытым токеном функциям  API"
       }
     },
     "/api/v1/account/users/{id}": {
       "put": {
         "tags": [
-          "User"
+          "Account.User"
         ],
         "summary": "",
         "responses": {},
@@ -79,7 +79,7 @@
       },
       "get": {
         "tags": [
-          "User"
+          "Account.User"
         ],
         "summary": "",
         "responses": {
@@ -107,7 +107,7 @@
       },
       "delete": {
         "tags": [
-          "User"
+          "Account.User"
         ],
         "summary": "",
         "responses": {
@@ -131,7 +131,7 @@
     "/api/v1/account/users": {
       "post": {
         "tags": [
-          "User"
+          "Account.User"
         ],
         "summary": "",
         "responses": {
@@ -193,7 +193,7 @@
       },
       "get": {
         "tags": [
-          "User"
+          "Account.User"
         ],
         "summary": "",
         "responses": {
@@ -216,7 +216,7 @@
   "info": {
     "version": "1.0",
     "title": "Behemoth API",
-    "description": "## Возможности: описание скоро будет доступно\n"
+    "description": "Аутентификация пользователя осуществляется посредством токена доступа, который необходимо получить через запрос\n`[GET] /api/v1/auth/authenticate/user`. Полученный токен передается в заголовке `Authorization: Bearer token`.\n"
   },
   "definitions": {
     "Users": {

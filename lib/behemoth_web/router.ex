@@ -14,7 +14,7 @@ defmodule BehemothWeb.Router do
       end
 
       scope "/auth", Auth, as: :auth do
-        get "/ping", AuthController, :ping
+        get "/authenticate/ping", AuthenticateController, :ping
       end
     end
   end
@@ -29,11 +29,12 @@ defmodule BehemothWeb.Router do
         version: "1.0",
         title: "Behemoth API",
         description: """
-        ## Возможности: описание скоро будет доступно
+        Аутентификация пользователя осуществляется посредством токена доступа, который необходимо получить через запрос
+        `[GET] /api/v1/auth/authenticate/user`. Полученный токен передается в заголовке `Authorization: Bearer token`.
         """
       },
       securityDefinitions: %{
-        api_auth: %{
+        Bearer: %{
           type: "apiKey",
           name: "Authorization",
           in: "header"
