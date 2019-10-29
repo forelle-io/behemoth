@@ -62,14 +62,4 @@ defmodule Begemoth.Contexts.Auth.SmsCode do
     end)
     |> Enum.join("")
   end
-
-  def last_unconfirmed_sms_code_query(struct_type, struct_id) do
-    from sms_code in SmsCode,
-      where:
-          sms_code.struct_type == ^struct_type and
-          sms_code.struct_id == ^struct_id and
-          is_nil(sms_code.confirmed_at),
-      order_by: [desc: sms_code.id],
-      limit: 1
-  end
 end

@@ -11,5 +11,7 @@ defmodule Behemoth.Repo.Migrations.CreateAuthSmsCodes do
 
       timestamps()
     end
+
+    create index(:"auth.sms_codes", [:struct_type, :struct_id])
   end
 end

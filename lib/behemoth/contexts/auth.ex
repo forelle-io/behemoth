@@ -25,13 +25,6 @@ defmodule Behemoth.Contexts.Auth do
     end
   end
 
-  def last_unconfirmed_sms_code(struct_type, struct_id) do
-    sms_code =
-      struct_type
-      |> SmsCode.last_unconfirmed_sms_code_query(struct_id)
-      |> Repo.one()
-  end
-
   def get_sms_code!(id), do: Repo.get!(SmsCode, id)
 
   def create_sms_code(attrs \\ %{}) do
