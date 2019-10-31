@@ -11,7 +11,7 @@ defmodule BehemothWeb.Api.V1.Auth.GatewayController do
   alias Behemoth.Contexts.Auth
   alias Begemoth.Contexts.Auth.SmsCode
 
-  action_fallback Behemoth.FallbackController
+  action_fallback BehemothWeb.FallbackController
 
   swagger_path :send_sms do
     post("/api/v1/auth/gateway/send_sms")
