@@ -31,6 +31,52 @@
         "description": "Проверка валидности доступа к закрытым токеном функциям  API"
       }
     },
+    "/api/v1/auth/gateway/send_sms": {
+      "post": {
+        "tags": [
+          "Auth.Gateway"
+        ],
+        "summary": "",
+        "responses": {
+          "404": {
+            "description": {
+              "errors": "not found"
+            }
+          },
+          "201": {
+            "description": {
+              "data": {
+                "phone": "79999999999"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "required": true,
+            "name": "struct_type",
+            "in": "formData",
+            "description": "Тип аккаунта"
+          },
+          {
+            "type": "integer",
+            "required": true,
+            "name": "phone",
+            "in": "formData",
+            "description": "Телефон"
+          }
+        ],
+        "operationId": "BehemothWeb.Api.V1.Auth.GatewayController.send_sms",
+        "description": "Отправка СМС сообщения",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ]
+      }
+    },
     "/api/v1/account/users/{id}": {
       "put": {
         "tags": [
