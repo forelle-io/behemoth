@@ -23,6 +23,13 @@ defmodule Behemoth.Contexts.Account do
     end
   end
 
+  def get_user_by_phone(phone) do
+    case Repo.get_by(User, phone: phone) do
+      %User{} = user -> user
+      nil -> {:error, :not_found}
+    end
+  end
+
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.create_changeset(attrs)
