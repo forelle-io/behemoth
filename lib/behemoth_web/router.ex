@@ -15,6 +15,7 @@ defmodule BehemothWeb.Router do
 
       scope "/auth", Auth, as: :auth do
         get "/authenticate/ping", AuthenticateController, :ping
+        post "/gateway/send_sms", GatewayController, :send_sms
       end
     end
   end
