@@ -9,7 +9,7 @@ defmodule BehemothWeb.Api.V1.Auth.GatewayController do
   alias Behemoth.Contexts.Account
   alias Behemoth.Contexts.Account.User
   alias Behemoth.Contexts.Auth
-  alias Begemoth.Contexts.Auth.SmsCode
+  alias Behemoth.Contexts.Auth.SmsCode
 
   action_fallback BehemothWeb.FallbackController
 

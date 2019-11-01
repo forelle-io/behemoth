@@ -17,6 +17,8 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     tag("Account.User")
     description("Список пользователей")
 
+    security([%{Bearer: []}])
+
     response(code(:ok), %{"data" => %{"users" => Schema.ref(:Users)}})
   end
 
@@ -59,6 +61,8 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     tag("Account.User")
     description("Обновление пользователя")
 
+    security([%{Bearer: []}])
+
     consumes("application/x-www-form-urlencoded")
     produces("application/json")
 
@@ -82,6 +86,8 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     tag("Account.User")
     description("Получение информации о пользователе")
 
+    security([%{Bearer: []}])
+
     parameter(:id, :path, :integer, "Id пользователя", required: true)
 
     response(code(:ok), %{"data" => %{"user" => Schema.ref(:User)}})
@@ -97,6 +103,8 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
   swagger_path :delete do
     tag("Account.User")
     description("Удаление пользователя")
+
+    security([%{Bearer: []}])
 
     parameter(:id, :path, :integer, "Id пользователя", required: true)
 

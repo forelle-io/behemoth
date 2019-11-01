@@ -15,11 +15,8 @@ defmodule Behemoth.Contexts.Account do
 
   def get_user(id) do
     case Repo.get(User, id) do
-      %User{} = user ->
-        user
-
-      nil ->
-        {:error, :not_found}
+      %User{} = user -> user
+      nil -> {:error, :not_found}
     end
   end
 

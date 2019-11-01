@@ -8,29 +8,6 @@
     }
   },
   "paths": {
-    "/api/v1/auth/ping": {
-      "get": {
-        "tags": [
-          "Auth.Authenticate"
-        ],
-        "summary": "",
-        "responses": {
-          "401": {
-            "description": {
-              "error": "Correct auth token must be provided."
-            }
-          },
-          "200": {
-            "description": {
-              "message": "pong"
-            }
-          }
-        },
-        "parameters": [],
-        "operationId": "BehemothWeb.Api.V1.Auth.AuthenticateController.ping",
-        "description": "Проверка валидности доступа к закрытым токеном функциям  API"
-      }
-    },
     "/api/v1/auth/gateway/send_sms": {
       "post": {
         "tags": [
@@ -77,12 +54,91 @@
         ]
       }
     },
+    "/api/v1/auth/authenticate/user": {
+      "get": {
+        "tags": [
+          "Auth.Authenticate"
+        ],
+        "summary": "",
+        "responses": {
+          "404": {
+            "description": {
+              "errors": "not found"
+            }
+          },
+          "200": {
+            "description": {
+              "data": {
+                "jwt_token": "UxMiI2InR5cCImIkpXVCJ9.eyJhdW..."
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "required": false,
+            "name": "phone",
+            "in": "query",
+            "description": "Телефон"
+          },
+          {
+            "type": "string",
+            "required": false,
+            "name": "auth_code",
+            "in": "query",
+            "description": "Код подтверждения"
+          }
+        ],
+        "operationId": "BehemothWeb.Api.V1.Auth.AuthenticateController.user",
+        "description": "Аутентификация",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ]
+      }
+    },
+    "/api/v1/auth/authenticate/ping": {
+      "get": {
+        "tags": [
+          "Auth.Authenticate"
+        ],
+        "summary": "",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": {
+              "error": "Correct auth token must be provided."
+            }
+          },
+          "200": {
+            "description": {
+              "message": "pong"
+            }
+          }
+        },
+        "parameters": [],
+        "operationId": "BehemothWeb.Api.V1.Auth.AuthenticateController.ping",
+        "description": "Проверка валидности доступа к закрытым токеном функциям  API"
+      }
+    },
     "/api/v1/account/users/{id}": {
       "put": {
         "tags": [
           "Account.User"
         ],
         "summary": "",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {},
         "produces": [
           "application/json"
@@ -128,6 +184,11 @@
           "Account.User"
         ],
         "summary": "",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": {
@@ -156,6 +217,11 @@
           "Account.User"
         ],
         "summary": "",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "204": {
             "description": ""
@@ -242,6 +308,11 @@
           "Account.User"
         ],
         "summary": "",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": {
