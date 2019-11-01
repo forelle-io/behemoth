@@ -5,7 +5,7 @@ defmodule Behemoth.Mixfile do
     [
       app: :behemoth,
       version: "0.0.1",
-      elixir: "~> 1.5",
+      elixir: ">= 1.8.1",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext, :phoenix_swagger] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -43,6 +43,8 @@ defmodule Behemoth.Mixfile do
       # Базы данных
       {:ecto_sql, "~> 3.1"},
       {:postgrex, ">= 0.0.0"},
+      # Безопасность
+      {:guardian, "~> 2.0.0"},
       # I18N
       {:gettext, "~> 0.11"},
       # Сервера

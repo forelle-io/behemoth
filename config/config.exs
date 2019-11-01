@@ -21,6 +21,11 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:user_id]
 
+# Configures the guardian
+config :behemoth, Behemoth.Guardian,
+  issuer: "behemoth",
+  secret_key: "secret_key"
+
 # Swagger integration to Phoenix framework
 config :behemoth, :phoenix_swagger,
   swagger_files: %{

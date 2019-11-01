@@ -5,16 +5,36 @@ defmodule BehemothWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :guardian_user_pipeline do
+    plug BehemothWeb.Plugs.Api.V1.GuardianUserPipeline
+  end
+
+  pipeline :ensure_user_authenticated do
+    plug Guardian.Plug.EnsureAuthenticated, key: :user, claims: %{"typ" => "access"}
+  end
+
   scope "/api", BehemothWeb.Api, as: :api do
-    pipe_through :api
+    pipe_through [:api, :guardian_user_pipeline]
 
     scope "/v1", V1, as: :v1 do
       scope "/account", Account, as: :account do
-        resources "/users", UserController
+        pipe_through :ensure_user_authenticated
+
+        resources "/users", UserController, only: [:index, :update, :show, :delete]
+      end
+
+      scope "/account", Account, as: :account do
+        resources "/users", UserController, only: [:create]
       end
 
       scope "/auth", Auth, as: :auth do
+        pipe_through :ensure_user_authenticated
+
         get "/authenticate/ping", AuthenticateController, :ping
+      end
+
+      scope "/auth", Auth, as: :auth do
+        get "/authenticate/user", AuthenticateController, :user
         post "/gateway/send_sms", GatewayController, :send_sms
       end
     end

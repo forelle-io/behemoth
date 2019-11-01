@@ -1,5 +1,6 @@
-defmodule Begemoth.Contexts.Auth.SmsCode do
+defmodule Behemoth.Contexts.Auth.SmsCode do
   @moduledoc false
+
   use Ecto.Schema
 
   import Ecto.Changeset

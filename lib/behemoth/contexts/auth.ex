@@ -7,7 +7,7 @@ defmodule Behemoth.Contexts.Auth do
 
   alias Behemoth.Repo
 
-  alias Begemoth.Contexts.Auth.SmsCode
+  alias Behemoth.Contexts.Auth.SmsCode
 
   def list_sms_codes do
     Repo.all(SmsCode)
