@@ -11,6 +11,19 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
 
   action_fallback BehemothWeb.FallbackController
 
+  def action(conn, _) do
+    action_name = action_name(conn)
+
+    args =
+      if action_name in [:index, :create] do
+        [conn, conn.params]
+      else
+        [conn, conn.params, Behemoth.Guardian.Plug.current_resource(conn, key: :user)]
+      end
+
+    apply(__MODULE__, action_name, args)
+  end
+
   swagger_path :index do
     get("/api/v1/account/users")
 
@@ -44,6 +57,7 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     parameter(:"user[birthday]", :formData, :date, "Дата рождения")
 
     response(code(:created), %{"data" => %{"user" => Schema.ref(:User)}})
+    response(code(:unprocessable_entity), %{"errors" => %{"phone" => ["has already been taken"]}})
   end
 
   @spec create(Conn.t(), map) :: Conn.t()
@@ -67,16 +81,22 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     produces("application/json")
 
     parameter(:id, :path, :integer, "Id пользователя")
-    parameter(:"user[first_name]", :formData, :date, "Имя")
-    parameter(:"user[birthday]", :formData, :date, "Фамилия")
-    parameter(:"user[birthday]", :formData, :date, "Дата рождения")
+    parameter(:"user[first_name]", :query, :date, "Имя")
+    parameter(:"user[last_name]", :query, :date, "Фамилия")
+    parameter(:"user[birthday]", :query, :date, "Дата рождения")
+
+    response(code(:ok), %{"data" => %{"user" => Schema.ref(:User)}})
+    response(code(:forbidden), %{"errors" => "not authorized"})
+    response(code(:not_found), %{"errors" => "not found"})
+    response(code(:unauthorized), %{"errors" => "unauthorized"})
   end
 
-  @spec create(Conn.t(), map) :: Conn.t()
-  def update(conn, %{"id" => id, "user" => user_params}) do
+  @spec update(Conn.t(), map, %User{}) :: Conn.t()
+  def update(conn, %{"id" => id, "user" => user_params}, %User{} = current_user) do
     with %User{} = user <- Account.get_user(id),
-         {:ok, %User{} = user} <- Account.update_user(user, user_params) do
-      render(conn, "show.json", user: user)
+      :ok <- Bodyguard.permit(User, :update, current_user, user),
+      {:ok, %User{} = user} <- Account.update_user(user, user_params) do
+    render(conn, "show.json", user: user)
     end
   end
 
@@ -93,8 +113,8 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     response(code(:ok), %{"data" => %{"user" => Schema.ref(:User)}})
   end
 
-  @spec show(Conn.t(), map) :: Conn.t()
-  def show(conn, %{"id" => id}) do
+  @spec show(Conn.t(), map, %User{}) :: Conn.t()
+  def show(conn, %{"id" => id}, %User{} = current_user) do
     with %User{} = user <- Account.get_user(id) do
       render(conn, "show.json", user: user)
     end
@@ -109,11 +129,15 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     parameter(:id, :path, :integer, "Id пользователя", required: true)
 
     response(code(:no_content), "")
+    response(code(:forbidden), %{"errors" => "not authorized"})
+    response(code(:not_found), %{"errors" => "not found"})
+    response(code(:forbidden), %{"errors" => "forbidden"})
   end
 
-  @spec delete(Conn.t(), map) :: Conn.t()
-  def delete(conn, %{"id" => id}) do
+  @spec delete(Conn.t(), map, %User{}) :: Conn.t()
+  def delete(conn, %{"id" => id}, %User{} = current_user) do
     with %User{} = user <- Account.get_user(id),
+         :ok <- Bodyguard.permit(User, :delete, current_user, user),
          {:ok, %User{}} <- Account.delete_user(user) do
       send_resp(conn, :no_content, "")
     end
