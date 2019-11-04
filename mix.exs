@@ -44,6 +44,7 @@ defmodule Behemoth.Mixfile do
       {:ecto_sql, "~> 3.1"},
       {:postgrex, ">= 0.0.0"},
       # Безопасность
+      {:bodyguard, "~> 2.4"},
       {:guardian, "~> 2.0.0"},
       # I18N
       {:gettext, "~> 0.11"},

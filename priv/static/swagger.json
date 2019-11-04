@@ -139,7 +139,32 @@
             "Bearer": []
           }
         ],
-        "responses": {},
+        "responses": {
+          "404": {
+            "description": {
+              "errors": "not found"
+            }
+          },
+          "403": {
+            "description": {
+              "errors": "not authorized"
+            }
+          },
+          "401": {
+            "description": {
+              "errors": "unauthorized"
+            }
+          },
+          "200": {
+            "description": {
+              "data": {
+                "user": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          }
+        },
         "produces": [
           "application/json"
         ],
@@ -155,21 +180,21 @@
             "type": "date",
             "required": false,
             "name": "user[first_name]",
-            "in": "formData",
+            "in": "query",
             "description": "Имя"
           },
           {
             "type": "date",
             "required": false,
-            "name": "user[birthday]",
-            "in": "formData",
+            "name": "user[last_name]",
+            "in": "query",
             "description": "Фамилия"
           },
           {
             "type": "date",
             "required": false,
             "name": "user[birthday]",
-            "in": "formData",
+            "in": "query",
             "description": "Дата рождения"
           }
         ],
@@ -223,6 +248,16 @@
           }
         ],
         "responses": {
+          "404": {
+            "description": {
+              "errors": "not found"
+            }
+          },
+          "403": {
+            "description": {
+              "errors": "forbidden"
+            }
+          },
           "204": {
             "description": ""
           }
@@ -247,6 +282,15 @@
         ],
         "summary": "",
         "responses": {
+          "422": {
+            "description": {
+              "errors": {
+                "phone": [
+                  "has already been taken"
+                ]
+              }
+            }
+          },
           "201": {
             "description": {
               "data": {

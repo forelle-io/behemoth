@@ -23,7 +23,7 @@ defmodule BehemothWeb.FallbackController do
   def call(conn, {:error, :unauthorized}) do
     conn
     |> put_status(:forbidden)
-    |> put_view(MyAppWeb.ErrorView)
+    |> put_view(BehemothWeb.ErrorView)
     |> render("403.json")
   end
 end

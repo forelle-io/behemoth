@@ -5,6 +5,10 @@ defmodule Behemoth.Contexts.Account.User do
 
   import Ecto.Changeset
 
+  alias Behemoth.Policies.Account.UserPolicy
+
+  defdelegate authorize(action, user, params), to: UserPolicy
+
   schema "account.users" do
     field :phone, :integer
     field :birthday, :date
