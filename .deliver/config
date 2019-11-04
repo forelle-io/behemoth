@@ -4,10 +4,10 @@ APP="behemoth"
 # Configuration of where the releases would be built.
 BUILD_HOST="62.109.23.250"
 BUILD_USER="joker"
-BUILD_AT="/home/joker/applications/forelle-io/behemoth/behemoth_builds"
+BUILD_AT="/home/joker/applications/forelle-io/behemoth/builds"
 
 # The location where built releases are going to be stored.
-RELEASE_STORE=joker@62.109.23.250:/home/joker/applications/forelle-io/behemoth/behemoth_release_store/
+RELEASE_STORE=joker@62.109.23.250:/home/joker/applications/forelle-io/behemoth/release_store/
 
 # Host and use of where the app would run.
 PRODUCTION_HOSTS="62.109.23.250"
