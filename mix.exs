@@ -20,7 +20,7 @@ defmodule Behemoth.Mixfile do
   def application do
     [
       mod: {Behemoth.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :edeliver]
     ]
   end
 
@@ -53,6 +53,9 @@ defmodule Behemoth.Mixfile do
       # Протоколы, форматы
       {:jason, "~> 1.0"},
       {:decimal, "~> 1.8.0"},
+      # Деплой
+      {:edeliver, ">= 1.6.0"},
+      {:distillery, "~> 2.1.0", warn_missing: false},
       # Линтеры
       {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false}
     ]
