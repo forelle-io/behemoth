@@ -12,8 +12,9 @@ RELEASE_STORE=joker@62.109.23.250:/home/joker/applications/forelle-io/behemoth/r
 # Host and use of where the app would run.
 PRODUCTION_HOSTS="62.109.23.250"
 PRODUCTION_USER="joker"
-
 DELIVER_TO="/home/joker/applications/forelle-io/behemoth"
+
+AUTO_VERSION=git-branch+git-revision
 
 pre_erlang_get_and_update_deps() {
  # copy it on the build host to the build directory when building
@@ -41,4 +42,14 @@ pre_erlang_clean_compile() {
    cd '$BUILD_AT'
    APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest $SILENCE
  "
+}
+
+post_extract_release_archive() {
+  status "Refreshing start_erl.data"
+  __remote "
+    [ -f ~/.profile ] && source ~/.profile
+    set -e
+    cd $DELIVER_TO/$APP $SILENCE
+    cp releases/start_erl.data var/start_erl.data $SILENCE
+  "
 }

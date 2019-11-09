@@ -50,8 +50,12 @@ defmodule BehemothWeb.Router do
         version: "1.0",
         title: "Behemoth API",
         description: """
-        Аутентификация пользователя осуществляется посредством токена доступа, который необходимо получить через запрос
-        `[GET] /api/v1/auth/authenticate/user`. Полученный токен передается в заголовке `Authorization: Bearer token`.
+        Получение JWT - токена осущесвляется через запрос `[GET] /api/v1/auth/authenticate/user`.
+        После выдачи системой JWT - токена, его необходимо передавать в заголовке `Authorization: Bearer token`.
+
+        Возможности:
+        * Получение JWT - токена по телефону
+        * Создание / Редактирование / Удаление / Просмотр / Получение списка пользователя (пользователей)
         """
       },
       securityDefinitions: %{
