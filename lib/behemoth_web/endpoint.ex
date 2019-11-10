@@ -33,5 +33,11 @@ defmodule BehemothWeb.Endpoint do
     key: "_behemoth_key",
     signing_salt: "o5PZVsYq"
 
+  # Cross-Origin Resource Sharing
+  if Mix.env() == :dev do
+    plug CORSPlug,
+      origin: ~r/^https?:\/\/(localhost|127.0.0.1|192.168.232.3):300(0|1)$/
+  end
+
   plug BehemothWeb.Router
 end

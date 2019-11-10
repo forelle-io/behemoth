@@ -46,6 +46,7 @@ defmodule Behemoth.Mixfile do
       # Безопасность
       {:bodyguard, "~> 2.4"},
       {:guardian, "~> 2.0.0"},
+      {:cors_plug, "~> 2.0"},
       # I18N
       {:gettext, "~> 0.11"},
       # Сервера
