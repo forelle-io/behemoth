@@ -47,7 +47,7 @@ defmodule BehemothWeb.Api.V1.Auth.AuthenticateController do
     with %User{id: user_id} = user <- Account.get_user_by_phone(phone),
          %SmsCode{} = sms_code <- Auth.last_unconfirmed_sms_code("user", user_id, auth_code),
          {:ok, %SmsCode{}} <- Auth.update_sms_code(sms_code, %{confirmed_at: DateTime.utc_now()}),
-         {:ok, jwt_token, _claims} <- Behemoth.Guardian.encode_and_sign(user) do
+         {:ok, jwt_token, _claims} <- Behemoth.Guardian.encode_and_sign(user, %{}, ttl: {2, :weeks}) do
       json(conn, %{"data" => %{"jwt_token" => jwt_token}})
     end
   end

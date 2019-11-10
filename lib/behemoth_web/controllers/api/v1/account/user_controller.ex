@@ -94,9 +94,9 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
   @spec update(Conn.t(), map, %User{}) :: Conn.t()
   def update(conn, %{"id" => id, "user" => user_params}, %User{} = current_user) do
     with %User{} = user <- Account.get_user(id),
-      :ok <- Bodyguard.permit(User, :update, current_user, user),
-      {:ok, %User{} = user} <- Account.update_user(user, user_params) do
-    render(conn, "show.json", user: user)
+         :ok <- Bodyguard.permit(User, :update, current_user, user),
+         {:ok, %User{} = user} <- Account.update_user(user, user_params) do
+      render(conn, "show.json", user: user)
     end
   end
 
@@ -114,7 +114,7 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
   end
 
   @spec show(Conn.t(), map, %User{}) :: Conn.t()
-  def show(conn, %{"id" => id}, %User{} = current_user) do
+  def show(conn, %{"id" => id}, %User{} = _current_user) do
     with %User{} = user <- Account.get_user(id) do
       render(conn, "show.json", user: user)
     end
