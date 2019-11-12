@@ -52,8 +52,6 @@ defmodule Behemoth.Contexts.Auth.SmsCode do
     end
   end
 
-  defp generate_auth_code, do: generate_auth_code(4)
-
   defp generate_auth_code(length) when is_integer(length) do
     uppercase_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" |> String.split("", trim: true)
 
@@ -63,4 +61,6 @@ defmodule Behemoth.Contexts.Auth.SmsCode do
     end)
     |> Enum.join("")
   end
+
+  defp generate_auth_code, do: generate_auth_code(4)
 end
