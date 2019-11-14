@@ -20,18 +20,4 @@ defmodule Behemoth.Contexts.Geo.City do
     |> cast(attrs, [:name, :index, :region_type, :region_name])
     |> validate_required([:name])
   end
-
-  @doc false
-  def create_changeset(city, attrs) do
-    city
-    |> cast(attrs, [:name, :index, :region_type, :region_name])
-    |> validate_required([:name])
-  end
-
-  @doc false
-  def update_changeset(city, attrs) do
-    city
-    |> cast(attrs, [:name, :index, :region_type, :region_name])
-    |> validate_required([:name])
-  end
 end
