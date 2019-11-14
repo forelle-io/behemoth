@@ -13,16 +13,17 @@ defmodule Behemoth.Contexts.Geo do
 
   def get_city!(id), do: Repo.get!(City, id)
 
+  def get_city(id) do
+    case Repo.get(City, id) do
+      %City{} = city -> city
+      nil -> {:error, :not_found}
+    end
+  end
+
   def create_city(attrs \\ %{}) do
     %City{}
     |> City.changeset(attrs)
     |> Repo.insert()
-  end
-
-  def update_city(%City{} = city, attrs) do
-    city
-    |> City.changeset(attrs)
-    |> Repo.update()
   end
 
   def delete_city(%City{} = city) do

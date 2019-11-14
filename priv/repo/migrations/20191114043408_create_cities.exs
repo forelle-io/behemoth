@@ -12,6 +12,6 @@ defmodule Behemoth.Repo.Migrations.CreateCities do
       timestamps()
     end
 
-    create unique_index(:"geo.cities", :name)
+    create index(:"geo.cities", [:name])
   end
 end
