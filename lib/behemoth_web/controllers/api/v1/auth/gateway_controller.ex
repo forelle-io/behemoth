@@ -26,16 +26,26 @@ defmodule BehemothWeb.Api.V1.Auth.GatewayController do
     parameter(:phone, :formData, :integer, "Телефон", required: true)
 
     response(code(:created), %{"data" => %{"phone" => "79999999999"}})
-    response(code(:not_found), %{"errors" => "not found"})
   end
 
   def send_sms(conn, %{"struct_type" => "user", "phone" => phone}) do
-    with %User{id: user_id, phone: phone} <- Account.get_user_by_phone(phone),
-         {:ok, %SmsCode{auth_code: auth_code}} <-
-           Auth.create_sms_code(%{"struct_type" => "user", "struct_id" => user_id}) do
-      conn
-      |> put_status(:created)
-      |> json(%{"data" => %{"phone" => phone, "auth_code" => auth_code}})
+    case Account.get_user_by_phone(phone) do
+      %User{} = user ->
+        send_sms(conn, user)
+
+      {:error, :not_found} ->
+        with {:ok, %User{} = user} <- Account.create_user(%{"phone" => phone}) do
+          send_sms(conn, user)
+        end
     end
+  end
+
+  def send_sms(conn, %User{id: user_id, phone: phone}) do
+    with {:ok, %SmsCode{auth_code: auth_code}} <-
+      Auth.create_sms_code(%{"struct_type" => "user", "struct_id" => user_id}) do
+        conn
+        |> put_status(:created)
+        |> json(%{"data" => %{"phone" => phone, "auth_code" => auth_code}})
+      end
   end
 end

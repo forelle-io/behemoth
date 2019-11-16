@@ -15,11 +15,6 @@
         ],
         "summary": "",
         "responses": {
-          "404": {
-            "description": {
-              "errors": "not found"
-            }
-          },
           "201": {
             "description": {
               "data": {
