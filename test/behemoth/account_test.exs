@@ -6,7 +6,7 @@ defmodule Behemoth.AccountTest do
   describe "users" do
     alias Behemoth.Contexts.Account.User
 
-    @valid_attrs %{phone: 79_999_999_999}
+    @valid_attrs %{phone: 70_000_000_001}
     @update_attrs %{first_name: "Name"}
     @invalid_attrs %{gender: "male"}
 
