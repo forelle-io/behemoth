@@ -42,10 +42,10 @@ defmodule BehemothWeb.Api.V1.Auth.GatewayController do
 
   def send_sms(conn, %User{id: user_id, phone: phone}) do
     with {:ok, %SmsCode{auth_code: auth_code}} <-
-      Auth.create_sms_code(%{"struct_type" => "user", "struct_id" => user_id}) do
-        conn
-        |> put_status(:created)
-        |> json(%{"data" => %{"phone" => phone, "auth_code" => auth_code}})
-      end
+           Auth.create_sms_code(%{"struct_type" => "user", "struct_id" => user_id}) do
+      conn
+      |> put_status(:created)
+      |> json(%{"data" => %{"phone" => phone, "auth_code" => auth_code}})
+    end
   end
 end
