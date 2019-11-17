@@ -4,7 +4,7 @@ defmodule Behemoth.Repo.Migrations.CreateCities do
 
   def change do
     create table(:"geo.cities") do
-      add :name, :string
+      add :name, :string, null: false
       add :index, :integer
       add :region_type, :string
       add :region_name, :string
