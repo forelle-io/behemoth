@@ -22,8 +22,8 @@ defmodule Behemoth.Contexts.Account.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:phone, :birthday, :gender, :first_name, :last_name])
-    |> validate_required([:phone])
+    |> cast(attrs, [:phone, :first_name, :last_name])
+    |> validate_required([:phone, :first_name, :last_name])
     |> validate_number(:phone, greater_than_or_equal_to: 70_000_000_000, less_than_or_equal_to: 79_999_999_999)
     |> unique_constraint(:phone, name: "account_users_phone_index")
   end
@@ -37,6 +37,6 @@ defmodule Behemoth.Contexts.Account.User do
   def update_changeset(user, attrs) do
     user
     |> cast(attrs, [:birthday, :gender, :first_name, :last_name])
-    |> validate_required([:phone])
+    |> validate_required([:phone, :first_name, :last_name, :gender, :birthday])
   end
 end

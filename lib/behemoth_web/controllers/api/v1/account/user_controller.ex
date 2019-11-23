@@ -51,10 +51,8 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     produces("application/json")
 
     parameter(:"user[phone]", :formData, :integer, "Телефон", required: true)
-    parameter(:"user[first_name]", :formData, :string, "Имя")
-    parameter(:"user[last_name]", :formData, :string, "Фамилия")
-    parameter(:"user[gender]", :formData, :integer, "Пол")
-    parameter(:"user[birthday]", :formData, :date, "Дата рождения")
+    parameter(:"user[first_name]", :formData, :string, "Имя", required: true)
+    parameter(:"user[last_name]", :formData, :string, "Фамилия", required: true)
 
     response(code(:created), %{"data" => %{"user" => Schema.ref(:User)}})
     response(code(:unprocessable_entity), %{"errors" => %{"phone" => ["has already been taken"]}})
@@ -84,6 +82,7 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     parameter(:"user[first_name]", :query, :date, "Имя")
     parameter(:"user[last_name]", :query, :date, "Фамилия")
     parameter(:"user[birthday]", :query, :date, "Дата рождения")
+    parameter(:"user[gender]", :formData, :integer, "Пол")
 
     response(code(:ok), %{"data" => %{"user" => Schema.ref(:User)}})
     response(code(:forbidden), %{"errors" => "not authorized"})
