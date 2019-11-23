@@ -17,4 +17,5 @@ defmodule BehemothWeb.ErrorView do
   def render("401.json", _params), do: %{errors: "unauthorized"}
   def render("403.json", _params), do: %{errors: "forbidden"}
   def render("404.json", _params), do: %{errors: "not found"}
+  def render("422.json", _params), do: %{errors: "unprocessable_entity"}
 end

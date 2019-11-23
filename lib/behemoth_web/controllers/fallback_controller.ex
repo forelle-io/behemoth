@@ -26,4 +26,11 @@ defmodule BehemothWeb.FallbackController do
     |> put_view(BehemothWeb.ErrorView)
     |> render("403.json")
   end
+
+  def call(conn, {:error, :unprocessable_entity}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> put_view(BehemothWeb.ErrorView)
+    |> render("422.json", %{})
+  end
 end

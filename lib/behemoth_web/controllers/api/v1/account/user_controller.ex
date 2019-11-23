@@ -50,6 +50,7 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     consumes("application/x-www-form-urlencoded")
     produces("application/json")
 
+    parameter(:is_adulthood, :formData, :boolean, "Подтверждение совершеннолетия", required: true)
     parameter(:"user[phone]", :formData, :integer, "Телефон", required: true)
     parameter(:"user[first_name]", :formData, :string, "Имя", required: true)
     parameter(:"user[last_name]", :formData, :string, "Фамилия", required: true)
@@ -59,12 +60,16 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
   end
 
   @spec create(Conn.t(), map) :: Conn.t()
-  def create(conn, %{"user" => user_params}) do
+  def create(conn, %{"user" => user_params, "is_adulthood" => "true"}) do
     with {:ok, %User{} = user} <- Account.create_user(user_params) do
       conn
       |> put_status(:created)
       |> render("show.json", user: user)
     end
+  end
+
+  def create(_conn, %{"user" => _user_params, "is_adulthood" => _is_adulthood}) do
+    {:error, :unprocessable_entity}
   end
 
   swagger_path :update do

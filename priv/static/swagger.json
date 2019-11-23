@@ -313,6 +313,13 @@
         ],
         "parameters": [
           {
+            "type": "boolean",
+            "required": true,
+            "name": "is_adulthood",
+            "in": "formData",
+            "description": "Подтверждение совершеннолетия"
+          },
+          {
             "type": "integer",
             "required": true,
             "name": "user[phone]",
