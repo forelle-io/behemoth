@@ -18,7 +18,7 @@ defmodule BehemothWeb.GuardianErrorHandler do
   @impl Guardian.Plug.ErrorHandler
   def auth_error(conn, {:no_resource_found, _reason}, _opts) do
     conn
-    |> put_status(:unauthorized)
+    |> put_status(:not_found)
     |> put_view(BehemothWeb.ErrorView)
     |> render("404.json")
   end

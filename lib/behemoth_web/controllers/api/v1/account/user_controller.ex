@@ -50,23 +50,26 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     consumes("application/x-www-form-urlencoded")
     produces("application/json")
 
+    parameter(:is_adulthood, :formData, :boolean, "Подтверждение совершеннолетия", required: true)
     parameter(:"user[phone]", :formData, :integer, "Телефон", required: true)
-    parameter(:"user[first_name]", :formData, :string, "Имя")
-    parameter(:"user[last_name]", :formData, :string, "Фамилия")
-    parameter(:"user[gender]", :formData, :integer, "Пол")
-    parameter(:"user[birthday]", :formData, :date, "Дата рождения")
+    parameter(:"user[first_name]", :formData, :string, "Имя", required: true)
+    parameter(:"user[last_name]", :formData, :string, "Фамилия", required: true)
 
     response(code(:created), %{"data" => %{"user" => Schema.ref(:User)}})
     response(code(:unprocessable_entity), %{"errors" => %{"phone" => ["has already been taken"]}})
   end
 
   @spec create(Conn.t(), map) :: Conn.t()
-  def create(conn, %{"user" => user_params}) do
+  def create(conn, %{"user" => user_params, "is_adulthood" => "true"}) do
     with {:ok, %User{} = user} <- Account.create_user(user_params) do
       conn
       |> put_status(:created)
       |> render("show.json", user: user)
     end
+  end
+
+  def create(_conn, %{"user" => _user_params, "is_adulthood" => _is_adulthood}) do
+    {:error, :unprocessable_entity}
   end
 
   swagger_path :update do
@@ -84,6 +87,7 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     parameter(:"user[first_name]", :query, :date, "Имя")
     parameter(:"user[last_name]", :query, :date, "Фамилия")
     parameter(:"user[birthday]", :query, :date, "Дата рождения")
+    parameter(:"user[gender]", :formData, :integer, "Пол")
 
     response(code(:ok), %{"data" => %{"user" => Schema.ref(:User)}})
     response(code(:forbidden), %{"errors" => "not authorized"})

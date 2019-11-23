@@ -15,6 +15,11 @@
         ],
         "summary": "",
         "responses": {
+          "404": {
+            "description": {
+              "errors": "not found"
+            }
+          },
           "201": {
             "description": {
               "data": {
@@ -191,6 +196,13 @@
             "name": "user[birthday]",
             "in": "query",
             "description": "Дата рождения"
+          },
+          {
+            "type": "integer",
+            "required": false,
+            "name": "user[gender]",
+            "in": "formData",
+            "description": "Пол"
           }
         ],
         "operationId": "BehemothWeb.Api.V1.Account.UserController.update",
@@ -301,6 +313,13 @@
         ],
         "parameters": [
           {
+            "type": "boolean",
+            "required": true,
+            "name": "is_adulthood",
+            "in": "formData",
+            "description": "Подтверждение совершеннолетия"
+          },
+          {
             "type": "integer",
             "required": true,
             "name": "user[phone]",
@@ -309,31 +328,17 @@
           },
           {
             "type": "string",
-            "required": false,
+            "required": true,
             "name": "user[first_name]",
             "in": "formData",
             "description": "Имя"
           },
           {
             "type": "string",
-            "required": false,
+            "required": true,
             "name": "user[last_name]",
             "in": "formData",
             "description": "Фамилия"
-          },
-          {
-            "type": "integer",
-            "required": false,
-            "name": "user[gender]",
-            "in": "formData",
-            "description": "Пол"
-          },
-          {
-            "type": "date",
-            "required": false,
-            "name": "user[birthday]",
-            "in": "formData",
-            "description": "Дата рождения"
           }
         ],
         "operationId": "BehemothWeb.Api.V1.Account.UserController.create",
