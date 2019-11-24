@@ -52,8 +52,9 @@ defmodule Behemoth.Mixfile do
       # Сервера
       {:plug_cowboy, "~> 2.0"},
       # Протоколы, форматы
-      {:jason, "~> 1.0"},
+      {:csv, "~> 2.3"},
       {:decimal, "~> 1.8.0"},
+      {:jason, "~> 1.0"},
       # Деплой
       {:edeliver, ">= 1.6.0"},
       {:distillery, "~> 2.1"},
