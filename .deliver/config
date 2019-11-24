@@ -49,7 +49,9 @@ post_extract_release_archive() {
   __remote "
     [ -f ~/.profile ] && source ~/.profile
     set -e
-    cd $DELIVER_TO/$APP $SILENCE
-    cp releases/start_erl.data var/start_erl.data $SILENCE
+    cd $DELIVER_TO/$APP
+    if [ -f 'var/start_erl.data' ]; then
+      cp releases/start_erl.data var/start_erl.data $SILENCE
+    fi
   "
 }
