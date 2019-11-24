@@ -58,7 +58,8 @@ defmodule Behemoth.Mixfile do
       {:edeliver, ">= 1.6.0"},
       {:distillery, "~> 2.1"},
       # Линтеры
-      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
+      {:csv, "~> 2.3"}
     ]
   end
 
