@@ -1,12 +1,13 @@
 defmodule Behemoth.Contexts.Fishing do
-  @moduledoc false
+  @moduledoc """
+  Контекст Рыбной ловли
+  """
 
   import Ecto.Query, warn: false
-  alias Behemoth.Repo
 
   alias Behemoth.Contexts.Fishing.Fish
+  alias Behemoth.Repo
 
-  #структура рыб -------------------------------------------------------------------
   def list_fishes do
     Repo.all(Fish)
   end
