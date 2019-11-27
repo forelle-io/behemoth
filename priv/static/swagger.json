@@ -46,7 +46,7 @@
     "/api/v1/fishing/techniques": {
       "get": {
         "tags": [
-          "Fishing.Technique"
+          "Fishing"
         ],
         "summary": "",
         "security": [
@@ -78,10 +78,45 @@
         "description": "Список техник ловли рыб с возможностью фильтрации"
       }
     },
+    "/api/v1/fishing/fishes": {
+      "get": {
+        "tags": [
+          "Fishing"
+        ],
+        "summary": "",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": {
+              "data": {
+                "fishes": {
+                  "$ref": "#/definitions/Fishes"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "required": false,
+            "name": "name",
+            "in": "query",
+            "description": "Наименование"
+          }
+        ],
+        "operationId": "BehemothWeb.Api.V1.Fishing.FishController.index",
+        "description": "Список рыб с возможностью фильтрации"
+      }
+    },
     "/api/v1/auth/gateway/send_sms": {
       "post": {
         "tags": [
-          "Auth.Gateway"
+          "Auth"
         ],
         "summary": "",
         "responses": {
@@ -127,7 +162,7 @@
     "/api/v1/auth/authenticate/user": {
       "get": {
         "tags": [
-          "Auth.Authenticate"
+          "Auth"
         ],
         "summary": "",
         "responses": {
@@ -173,7 +208,7 @@
     "/api/v1/auth/authenticate/ping": {
       "get": {
         "tags": [
-          "Auth.Authenticate"
+          "Auth"
         ],
         "summary": "",
         "security": [
@@ -201,7 +236,7 @@
     "/api/v1/account/users/{id}": {
       "put": {
         "tags": [
-          "Account.User"
+          "Account"
         ],
         "summary": "",
         "security": [
@@ -283,7 +318,7 @@
       },
       "get": {
         "tags": [
-          "Account.User"
+          "Account"
         ],
         "summary": "",
         "security": [
@@ -316,7 +351,7 @@
       },
       "delete": {
         "tags": [
-          "Account.User"
+          "Account"
         ],
         "summary": "",
         "security": [
@@ -355,7 +390,7 @@
     "/api/v1/account/users": {
       "post": {
         "tags": [
-          "Account.User"
+          "Account"
         ],
         "summary": "",
         "responses": {
@@ -419,7 +454,7 @@
       },
       "get": {
         "tags": [
-          "Account.User"
+          "Account"
         ],
         "summary": "",
         "security": [
@@ -447,7 +482,7 @@
   "info": {
     "version": "1.0",
     "title": "Behemoth API",
-    "description": "Получение JWT - токена осущесвляется через запрос `[GET] /api/v1/auth/authenticate/user`.\nПосле выдачи системой JWT - токена, его необходимо передавать в заголовке `Authorization: Bearer token`.\n\nВозможности:\n* Получение JWT - токена по телефону\n* Создание / Редактирование / Удаление / Просмотр / Получение списка пользователя (пользователей)\n"
+    "description": "Получение JWT - токена осущесвляется через запрос `[GET] /api/v1/auth/authenticate/user`.\nПосле выдачи системой JWT - токена, его необходимо передавать в заголовке `Authorization: Bearer token`.\n\nВозможности:\n* Получение JWT - токена по телефону\n* Создание / Редактирование / Удаление / Просмотр / Получение списка пользователя (пользователей)\n* Списки Рыб / Техник ловли рыб / Городов с возможностью фильтрации\n"
   },
   "definitions": {
     "Users": {
@@ -519,7 +554,7 @@
       "items": {
         "$ref": "#/definitions/Technique"
       },
-      "description": "Список техник ловли"
+      "description": "Список техник ловли рыб"
     },
     "Technique": {
       "type": "object",
@@ -543,6 +578,37 @@
         "id": 1
       },
       "description": "Техника ловли"
+    },
+    "Fishes": {
+      "type": "array",
+      "title": "Fishing.Fishes",
+      "items": {
+        "$ref": "#/definitions/Technique"
+      },
+      "description": "Список рыб"
+    },
+    "Fish": {
+      "type": "object",
+      "title": "Fishing.Fish",
+      "required": [
+        "name",
+        "id"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Наименование"
+        },
+        "id": {
+          "type": "integer",
+          "description": "Id"
+        }
+      },
+      "example": {
+        "name": "щука",
+        "id": 1
+      },
+      "description": "Рыба"
     },
     "City": {
       "type": "object",

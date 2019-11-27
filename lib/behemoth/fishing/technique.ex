@@ -20,6 +20,6 @@ defmodule Behemoth.Contexts.Fishing.Technique do
   end
 
   def search_by_name_with_like_query(name) do
-    from t in Technique, where: like(t.name, ^"%#{name}%")
+    from t in Technique, where: ilike(t.name, ^"%#{name}%")
   end
 end

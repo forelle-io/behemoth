@@ -47,6 +47,7 @@ defmodule BehemothWeb.Router do
       scope "/fishing", Fishing, as: :fishing do
         pipe_through :ensure_user_authenticated
 
+        resources "/fishes", FishController, only: [:index]
         resources "/techniques", TechniqueController, only: [:index]
       end
     end
@@ -68,6 +69,7 @@ defmodule BehemothWeb.Router do
         Возможности:
         * Получение JWT - токена по телефону
         * Создание / Редактирование / Удаление / Просмотр / Получение списка пользователя (пользователей)
+        * Списки Рыб / Техник ловли рыб / Городов с возможностью фильтрации
         """
       },
       securityDefinitions: %{

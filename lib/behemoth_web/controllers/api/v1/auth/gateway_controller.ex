@@ -16,7 +16,7 @@ defmodule BehemothWeb.Api.V1.Auth.GatewayController do
   swagger_path :send_sms do
     post("/api/v1/auth/gateway/send_sms")
 
-    tag("Auth.Gateway")
+    tag("Auth")
     description("Отправка СМС сообщения")
 
     consumes("application/x-www-form-urlencoded")
