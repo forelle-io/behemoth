@@ -1,4 +1,6 @@
-defmodule Behemoth.Repo.Migrations.CreateFishes do
+defmodule Behemoth.Repo.Migrations.CreateFishingFishes do
+  @moduledoc false
+
   use Ecto.Migration
 
   def change do

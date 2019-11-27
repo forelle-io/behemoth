@@ -1,5 +1,6 @@
 defmodule Behemoth.Repo.Migrations.CreateAuthSmsCodes do
   @moduledoc false
+
   use Ecto.Migration
 
   def change do

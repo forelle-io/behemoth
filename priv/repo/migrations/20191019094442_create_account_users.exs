@@ -1,4 +1,6 @@
 defmodule Behemoth.Repo.Migrations.CreateAccountUsers do
+  @moduledoc false
+
   use Ecto.Migration
 
   def change do

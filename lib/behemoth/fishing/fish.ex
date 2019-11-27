@@ -1,6 +1,8 @@
 defmodule Behemoth.Contexts.Fishing.Fish do
   @moduledoc false
+
   use Ecto.Schema
+
   import Ecto.Changeset
 
   schema "fishing.fishes" do

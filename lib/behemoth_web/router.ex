@@ -43,6 +43,12 @@ defmodule BehemothWeb.Router do
 
         resources "/cities", CityController, only: [:index]
       end
+
+      scope "/fishing", Fishing, as: :fishing do
+        pipe_through :ensure_user_authenticated
+
+        resources "/techniques", TechniqueController, only: [:index]
+      end
     end
   end
 
