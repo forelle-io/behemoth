@@ -1,4 +1,4 @@
-:label: Задача в Jira: [DEV-XXX](https://forelle.atlassian.net/browse/DEV-XXX)
+:label: Задача в Jira: [BACKEND-XXX](https://forelle.atlassian.net/browse/BACKEND-XXX)
 
 ## Описание
 
