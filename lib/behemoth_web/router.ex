@@ -37,6 +37,12 @@ defmodule BehemothWeb.Router do
         get "/authenticate/user", AuthenticateController, :user
         post "/gateway/send_sms", GatewayController, :send_sms
       end
+
+      scope "/geo", Geo, as: :geo do
+        pipe_through :ensure_user_authenticated
+
+        resources "/cities", CityController, only: [:index]
+      end
     end
   end
 

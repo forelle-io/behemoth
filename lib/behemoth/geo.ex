@@ -7,8 +7,18 @@ defmodule Behemoth.Contexts.Geo do
 
   alias Behemoth.Contexts.Geo.City
 
-  def list_cities do
-    Repo.all(City)
+  def list_cities, do: Repo.all(City)
+
+  def list_cities(params) do
+    case params do
+      %{"name" => name} ->
+        name
+        |> City.search_by_name_with_like_query()
+        |> Repo.all()
+
+      _ ->
+        list_cities()
+    end
   end
 
   def get_city!(id), do: Repo.get!(City, id)
