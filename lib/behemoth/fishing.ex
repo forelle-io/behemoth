@@ -35,8 +35,18 @@ defmodule Behemoth.Contexts.Fishing do
     Fish.changeset(fish, %{})
   end
 
-  def list_techniques do
-    Repo.all(Technique)
+  def list_techniques, do: Repo.all(Technique)
+
+  def list_techniques(params) do
+    case params do
+      %{"name" => name} ->
+        name
+        |> Technique.search_by_name_with_like_query()
+        |> Repo.all()
+
+      _ ->
+        list_techniques()
+    end
   end
 
   def get_technique!(id), do: Repo.get!(Technique, id)

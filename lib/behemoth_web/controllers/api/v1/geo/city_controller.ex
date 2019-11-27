@@ -42,10 +42,7 @@ defmodule BehemothWeb.Api.V1.Geo.CityController do
             name(:string, "Наименование", required: true)
           end
 
-          example(%{
-            id: 1,
-            name: "Москва"
-          })
+          example(%{id: 1, name: "Москва"})
         end,
       Cities:
         swagger_schema do
