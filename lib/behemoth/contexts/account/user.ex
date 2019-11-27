@@ -5,6 +5,7 @@ defmodule Behemoth.Contexts.Account.User do
 
   import Ecto.Changeset
 
+  alias Behemoth.Contexts.Geo.City
   alias Behemoth.Policies.Account.UserPolicy
 
   defdelegate authorize(action, user, params), to: UserPolicy
@@ -17,6 +18,8 @@ defmodule Behemoth.Contexts.Account.User do
     field :last_name, :string
 
     timestamps()
+
+    belongs_to :city, City
   end
 
   @doc false
@@ -36,7 +39,8 @@ defmodule Behemoth.Contexts.Account.User do
   @doc false
   def update_changeset(user, attrs) do
     user
-    |> cast(attrs, [:birthday, :gender, :first_name, :last_name])
+    |> cast(attrs, [:birthday, :gender, :first_name, :last_name, :city_id])
     |> validate_required([:phone, :first_name, :last_name, :gender, :birthday])
+    |> foreign_key_constraint(:city_id)
   end
 end

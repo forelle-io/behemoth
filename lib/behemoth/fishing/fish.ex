@@ -12,5 +12,6 @@ defmodule Behemoth.Contexts.Fishing.Fish do
     fish
     |> cast(attrs, [:name])
     |> validate_required([:name])
+    |> unique_constraint(:name, name: "fishing_fishes_name_index")
   end
 end

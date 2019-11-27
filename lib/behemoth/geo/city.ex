@@ -6,18 +6,14 @@ defmodule Behemoth.Contexts.Geo.City do
   import Ecto.Changeset
 
   schema "geo.cities" do
-    field :index, :integer
     field :name, :string
-    field :region_type, :string
-    field :region_name, :string
-
-    timestamps()
   end
 
   @doc false
   def changeset(city, attrs) do
     city
-    |> cast(attrs, [:name, :index, :region_type, :region_name])
+    |> cast(attrs, [:name])
     |> validate_required([:name])
+    |> unique_constraint(:name, name: "geo_cities_name_index")
   end
 end
