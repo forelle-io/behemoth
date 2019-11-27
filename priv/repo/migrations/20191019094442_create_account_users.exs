@@ -8,6 +8,7 @@ defmodule Behemoth.Repo.Migrations.CreateAccountUsers do
       add :gender, :integer
       add :first_name, :string
       add :last_name, :string
+      add :city_id, references(:"geo.cities")
 
       timestamps()
     end
