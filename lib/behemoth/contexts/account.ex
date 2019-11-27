@@ -3,9 +3,8 @@ defmodule Behemoth.Contexts.Account do
 
   import Ecto.Query, warn: false
 
-  alias Behemoth.Repo
-
   alias Behemoth.Contexts.Account.User
+  alias Behemoth.Repo
 
   def list_users do
     Repo.all(User)

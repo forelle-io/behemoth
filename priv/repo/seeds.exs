@@ -1,6 +1,6 @@
 require Logger
 
-alias Behemoth.Contexts.Fishing.Fish
+alias Behemoth.Contexts.Fishing.{Fish, Technique}
 alias Behemoth.Contexts.Geo.City
 alias Behemoth.Repo
 
@@ -14,6 +14,26 @@ Repo.insert_all(
   |> Enum.map(fn {:ok, data} ->
     data
   end)
+)
+
+Logger.info("Инициализация таблицы fishing.techniques")
+
+Repo.insert_all(
+  Technique,
+  [
+    %{name: "спиннинг"},
+    %{name: "троллинг"},
+    %{name: "джиг"},
+    %{name: "микроджиг"},
+    %{name: "твичинг"},
+    %{name: "сбирулино"},
+    %{name: "жерлица"},
+    %{name: "балансир"},
+    %{name: "нахлыст"},
+    %{name: "фидер"},
+    %{name: "донка"},
+    %{name: "поплавочная удочка"}
+  ]
 )
 
 Logger.info("Инициализация таблицы geo.cities")

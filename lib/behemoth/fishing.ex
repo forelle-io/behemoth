@@ -5,7 +5,7 @@ defmodule Behemoth.Contexts.Fishing do
 
   import Ecto.Query, warn: false
 
-  alias Behemoth.Contexts.Fishing.Fish
+  alias Behemoth.Contexts.Fishing.{Fish, Technique}
   alias Behemoth.Repo
 
   def list_fishes do
@@ -33,5 +33,32 @@ defmodule Behemoth.Contexts.Fishing do
 
   def change_fish(%Fish{} = fish) do
     Fish.changeset(fish, %{})
+  end
+
+  def list_techniques do
+    Repo.all(Technique)
+  end
+
+  def get_technique!(id), do: Repo.get!(Technique, id)
+
+  def get_technique(id) do
+    case Repo.get(Technique, id) do
+      %Technique{} = technique -> technique
+      nil -> {:error, :not_found}
+    end
+  end
+
+  def create_technique(attrs \\ %{}) do
+    %Technique{}
+    |> Technique.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def delete_technique(%Technique{} = technique) do
+    Repo.delete(technique)
+  end
+
+  def change_technique(%Technique{} = technique) do
+    Technique.changeset(technique, %{})
   end
 end

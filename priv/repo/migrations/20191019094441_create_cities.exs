@@ -1,5 +1,6 @@
 defmodule Behemoth.Repo.Migrations.CreateCities do
   @moduledoc false
+
   use Ecto.Migration
 
   def change do
