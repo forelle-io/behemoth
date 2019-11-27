@@ -14,7 +14,7 @@ defmodule BehemothWeb.Api.V1.Auth.AuthenticateController do
   swagger_path :ping do
     get("/api/v1/auth/authenticate/ping")
 
-    tag("Auth.Authenticate")
+    tag("Auth")
     description("Проверка валидности доступа к закрытым токеном функциям  API")
 
     security([%{Bearer: []}])
@@ -29,7 +29,7 @@ defmodule BehemothWeb.Api.V1.Auth.AuthenticateController do
   swagger_path :user do
     get("/api/v1/auth/authenticate/user")
 
-    tag("Auth.Authenticate")
+    tag("Auth")
     description("Аутентификация")
 
     consumes("application/x-www-form-urlencoded")

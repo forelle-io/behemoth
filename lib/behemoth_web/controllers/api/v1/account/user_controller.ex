@@ -27,7 +27,7 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
   swagger_path :index do
     get("/api/v1/account/users")
 
-    tag("Account.User")
+    tag("Account")
     description("Список пользователей")
 
     security([%{Bearer: []}])
@@ -44,7 +44,7 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
   swagger_path :create do
     post("/api/v1/account/users")
 
-    tag("Account.User")
+    tag("Account")
     description("Создание пользователя")
 
     consumes("application/x-www-form-urlencoded")
@@ -75,7 +75,7 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
   swagger_path :update do
     put("/api/v1/account/users/{id}")
 
-    tag("Account.User")
+    tag("Account")
     description("Обновление пользователя")
 
     security([%{Bearer: []}])
@@ -107,7 +107,7 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
   swagger_path :show do
     get("/api/v1/account/users/{id}")
 
-    tag("Account.User")
+    tag("Account")
     description("Получение информации о пользователе")
 
     security([%{Bearer: []}])
@@ -125,7 +125,7 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
   end
 
   swagger_path :delete do
-    tag("Account.User")
+    tag("Account")
     description("Удаление пользователя")
 
     security([%{Bearer: []}])

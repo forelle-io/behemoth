@@ -1,4 +1,4 @@
-defmodule BehemothWeb.Api.V1.Fishing.TechniqueController do
+defmodule BehemothWeb.Api.V1.Fishing.FishController do
   @moduledoc false
 
   use BehemothWeb, :controller
@@ -11,43 +11,43 @@ defmodule BehemothWeb.Api.V1.Fishing.TechniqueController do
   action_fallback BehemothWeb.FallbackController
 
   swagger_path :index do
-    get("/api/v1/fishing/techniques")
+    get("/api/v1/fishing/fishes")
 
     tag("Fishing")
-    description("Список техник ловли рыб с возможностью фильтрации")
+    description("Список рыб с возможностью фильтрации")
 
     parameter(:name, :query, :string, "Наименование")
 
     security([%{Bearer: []}])
 
-    response(code(:ok), %{"data" => %{"techniques" => Schema.ref(:Techniques)}})
+    response(code(:ok), %{"data" => %{"fishes" => Schema.ref(:Fishes)}})
   end
 
   @spec index(Conn.t(), map) :: Conn.t()
   def index(conn, params) do
-    techniques = Fishing.list_techniques(params)
-    render(conn, "index.json", techniques: techniques)
+    fishes = Fishing.list_fishes(params)
+    render(conn, "index.json", fishes: fishes)
   end
 
   # credo:disable-for-next-line Credo.Check.Refactor.ABCSize
   def swagger_definitions do
     %{
-      Technique:
+      Fish:
         swagger_schema do
-          title("Fishing.Technique")
-          description("Техника ловли")
+          title("Fishing.Fish")
+          description("Рыба")
 
           properties do
             id(:integer, "Id", required: true)
             name(:string, "Наименование", required: true)
           end
 
-          example(%{id: 1, name: "спиннинг"})
+          example(%{id: 1, name: "щука"})
         end,
-      Techniques:
+      Fishes:
         swagger_schema do
-          title("Fishing.Techniques")
-          description("Список техник ловли рыб")
+          title("Fishing.Fishes")
+          description("Список рыб")
 
           type(:array)
           items(Schema.ref(:Technique))

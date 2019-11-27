@@ -8,8 +8,18 @@ defmodule Behemoth.Contexts.Fishing do
   alias Behemoth.Contexts.Fishing.{Fish, Technique}
   alias Behemoth.Repo
 
-  def list_fishes do
-    Repo.all(Fish)
+  def list_fishes, do: Repo.all(Fish)
+
+  def list_fishes(params) do
+    case params do
+      %{"name" => name} ->
+        name
+        |> Fish.search_by_name_with_like_query()
+        |> Repo.all()
+
+      _ ->
+        list_fishes()
+    end
   end
 
   def get_fish!(id), do: Repo.get!(Fish, id)
