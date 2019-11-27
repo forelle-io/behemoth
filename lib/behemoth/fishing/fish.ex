@@ -20,6 +20,6 @@ defmodule Behemoth.Contexts.Fishing.Fish do
   end
 
   def search_by_name_with_like_query(name) do
-    from f in Fish, where: like(f.name, ^"%#{name}%")
+    from f in Fish, where: ilike(f.name, ^"%#{name}%")
   end
 end
