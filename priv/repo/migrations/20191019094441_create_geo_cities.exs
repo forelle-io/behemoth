@@ -1,4 +1,4 @@
-defmodule Behemoth.Repo.Migrations.CreateCities do
+defmodule Behemoth.Repo.Migrations.CreateGeoCities do
   @moduledoc false
 
   use Ecto.Migration
