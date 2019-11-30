@@ -13,9 +13,13 @@ defmodule BehemothWeb.Router do
     plug Guardian.Plug.EnsureAuthenticated, key: :user, claims: %{"typ" => "access"}
   end
 
+  scope "/", BehemothWeb.Api, as: :api do
+    pipe_through :api
+    get "/", V1.PageController, :index
+  end
+
   scope "/api", BehemothWeb.Api, as: :api do
     pipe_through [:api, :guardian_user_pipeline]
-
     scope "/v1", V1, as: :v1 do
       scope "/account", Account, as: :account do
         pipe_through :ensure_user_authenticated
