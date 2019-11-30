@@ -16,7 +16,7 @@ defmodule BehemothWeb.Router do
   scope "/" do
     pipe_through :api
 
-    get "/", BehemothWeb.Api.V1.PageController, :index
+    get "/", BehemothWeb.PageController, :index
 
     scope "/api", BehemothWeb.Api, as: :api do
       pipe_through :guardian_user_pipeline
