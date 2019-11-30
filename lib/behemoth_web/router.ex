@@ -13,46 +13,48 @@ defmodule BehemothWeb.Router do
     plug Guardian.Plug.EnsureAuthenticated, key: :user, claims: %{"typ" => "access"}
   end
 
-  scope "/", BehemothWeb.Api, as: :api do
+  scope "/" do
     pipe_through :api
-    get "/", V1.PageController, :index
-  end
 
-  scope "/api", BehemothWeb.Api, as: :api do
-    pipe_through [:api, :guardian_user_pipeline]
-    scope "/v1", V1, as: :v1 do
-      scope "/account", Account, as: :account do
-        pipe_through :ensure_user_authenticated
+    get "/", BehemothWeb.Api.V1.PageController, :index
 
-        resources "/users", UserController, only: [:index, :update, :show, :delete]
-      end
+    scope "/api", BehemothWeb.Api, as: :api do
+      pipe_through :guardian_user_pipeline
 
-      scope "/account", Account, as: :account do
-        resources "/users", UserController, only: [:create]
-      end
+      scope "/v1", V1, as: :v1 do
+        scope "/account", Account, as: :account do
+          pipe_through :ensure_user_authenticated
 
-      scope "/auth", Auth, as: :auth do
-        pipe_through :ensure_user_authenticated
+          resources "/users", UserController, only: [:index, :update, :show, :delete]
+        end
 
-        get "/authenticate/ping", AuthenticateController, :ping
-      end
+        scope "/account", Account, as: :account do
+          resources "/users", UserController, only: [:create]
+        end
 
-      scope "/auth", Auth, as: :auth do
-        get "/authenticate/user", AuthenticateController, :user
-        post "/gateway/send_sms", GatewayController, :send_sms
-      end
+        scope "/auth", Auth, as: :auth do
+          pipe_through :ensure_user_authenticated
 
-      scope "/geo", Geo, as: :geo do
-        pipe_through :ensure_user_authenticated
+          get "/authenticate/ping", AuthenticateController, :ping
+        end
 
-        resources "/cities", CityController, only: [:index]
-      end
+        scope "/auth", Auth, as: :auth do
+          get "/authenticate/user", AuthenticateController, :user
+          post "/gateway/send_sms", GatewayController, :send_sms
+        end
 
-      scope "/fishing", Fishing, as: :fishing do
-        pipe_through :ensure_user_authenticated
+        scope "/geo", Geo, as: :geo do
+          pipe_through :ensure_user_authenticated
 
-        resources "/fishes", FishController, only: [:index]
-        resources "/techniques", TechniqueController, only: [:index]
+          resources "/cities", CityController, only: [:index]
+        end
+
+        scope "/fishing", Fishing, as: :fishing do
+          pipe_through :ensure_user_authenticated
+
+          resources "/fishes", FishController, only: [:index]
+          resources "/techniques", TechniqueController, only: [:index]
+        end
       end
     end
   end
