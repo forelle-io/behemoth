@@ -10,6 +10,12 @@ defmodule Behemoth.Contexts.Fishing do
 
   def list_fishes, do: Repo.all(Fish)
 
+  def list_fishes(ids) when is_list(ids) do
+    ids
+    |> Fish.list_fishes_query()
+    |> Repo.all()
+  end
+
   def list_fishes(params) do
     case params do
       %{"name" => name} ->

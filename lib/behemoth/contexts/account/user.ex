@@ -5,6 +5,7 @@ defmodule Behemoth.Contexts.Account.User do
 
   import Ecto.Changeset
 
+  alias Behemoth.Contexts.Fishing.Fish
   alias Behemoth.Contexts.Geo.City
   alias Behemoth.Policies.Account.UserPolicy
 
@@ -17,9 +18,15 @@ defmodule Behemoth.Contexts.Account.User do
     field :first_name, :string
     field :last_name, :string
 
+    field :fishes_ids, :any, virtual: true
+
     timestamps()
 
     belongs_to :city, City
+
+    many_to_many :fishes, Fish,
+      join_through: "fishing.fishes_accounts_users",
+      on_replace: :delete
   end
 
   @doc false
@@ -39,8 +46,9 @@ defmodule Behemoth.Contexts.Account.User do
   @doc false
   def update_changeset(user, attrs) do
     user
-    |> cast(attrs, [:birthday, :gender, :first_name, :last_name, :city_id])
+    |> cast(attrs, [:birthday, :gender, :first_name, :last_name, :city_id, :fishes_ids])
     |> validate_required([:phone, :first_name, :last_name, :gender, :birthday])
     |> foreign_key_constraint(:city_id)
+    |> Fish.fishes_modify_changes()
   end
 end
