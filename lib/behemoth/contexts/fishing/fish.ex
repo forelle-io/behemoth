@@ -6,7 +6,7 @@ defmodule Behemoth.Contexts.Fishing.Fish do
   import Ecto.{Changeset, Query}
 
   alias Behemoth.Contexts.Account.User
-  alias Behemoth.Contexts.Fishing.FishAccountsUser
+  alias Behemoth.Contexts.Fishing.FishAccountUser
   alias Behemoth.Contexts.Fishing
   alias Ecto.Changeset
   alias __MODULE__
@@ -15,7 +15,7 @@ defmodule Behemoth.Contexts.Fishing.Fish do
     field :name, :string
 
     many_to_many :users, User,
-      join_through: FishAccountsUser,
+      join_through: FishAccountUser,
       on_replace: :delete
   end
 

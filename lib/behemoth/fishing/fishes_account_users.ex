@@ -1,4 +1,4 @@
-defmodule Behemoth.Contexts.Fishing.FishAccountsUser do
+defmodule Behemoth.Contexts.Fishing.FishAccountUser do
   @moduledoc false
   use Ecto.Schema
 
@@ -7,7 +7,7 @@ defmodule Behemoth.Contexts.Fishing.FishAccountsUser do
 
   @primary_key false
 
-  schema "fishing.fishes_accounts_users" do
+  schema "fishing.fishes_account_users" do
     belongs_to(:fishes, Fish, foreign_key: :fish_id)
     belongs_to(:users, User, foreign_key: :user_id)
   end

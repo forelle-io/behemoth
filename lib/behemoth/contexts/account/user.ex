@@ -25,7 +25,7 @@ defmodule Behemoth.Contexts.Account.User do
     belongs_to :city, City
 
     many_to_many :fishes, Fish,
-      join_through: "fishing.fishes_accounts_users",
+      join_through: "fishing.fishes_account_users",
       on_replace: :delete
   end
 
