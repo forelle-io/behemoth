@@ -43,15 +43,3 @@ pre_erlang_clean_compile() {
    APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phx.digest $SILENCE
  "
 }
-
-post_extract_release_archive() {
-  status "Refreshing start_erl.data"
-  __remote "
-    [ -f ~/.profile ] && source ~/.profile
-    set -e
-    cd $DELIVER_TO/$APP
-    if [ -f 'var/start_erl.data' ]; then
-      cp releases/start_erl.data var/start_erl.data $SILENCE
-    fi
-  "
-}

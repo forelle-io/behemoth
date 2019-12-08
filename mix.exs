@@ -56,8 +56,8 @@ defmodule Behemoth.Mixfile do
       {:decimal, "~> 1.8.0"},
       {:jason, "~> 1.0"},
       # Деплой
-      {:edeliver, ">= 1.6.0"},
-      {:distillery, "~> 2.1"},
+      {:edeliver, github: "delta1/edeliver"},
+      {:distillery, github: "delta1/distillery"},
       # Линтеры
       {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false}
     ]
