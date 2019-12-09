@@ -84,9 +84,9 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     produces("application/json")
 
     parameter(:id, :path, :integer, "Id пользователя")
-    parameter(:"user[first_name]", :query, :date, "Имя")
-    parameter(:"user[last_name]", :query, :date, "Фамилия")
-    parameter(:"user[birthday]", :query, :date, "Дата рождения")
+    parameter(:"user[first_name]", :formData, :date, "Имя")
+    parameter(:"user[last_name]", :formData, :date, "Фамилия")
+    parameter(:"user[birthday]", :formData, :date, "Дата рождения")
     parameter(:"user[gender]", :formData, :integer, "Пол")
 
     response(code(:ok), %{"data" => %{"user" => Schema.ref(:User)}})

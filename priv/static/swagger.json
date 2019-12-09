@@ -78,6 +78,105 @@
         "description": "Список техник ловли рыб с возможностью фильтрации"
       }
     },
+    "/api/v1/fishing/fishes_account_users": {
+      "post": {
+        "tags": [
+          "Fishing"
+        ],
+        "summary": "",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "422": {
+            "description": {
+              "errors": {
+                "phone": [
+                  "has already been taken"
+                ]
+              }
+            }
+          },
+          "201": {
+            "description": {
+              "data": {
+                "user": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "fish_id",
+            "in": "formData",
+            "description": "Id рыбы"
+          },
+          {
+            "type": "integer",
+            "required": true,
+            "name": "user_id",
+            "in": "formData",
+            "description": "Id пользователя"
+          }
+        ],
+        "operationId": "BehemothWeb.Api.V1.Fishing.FishAccountUserController.create",
+        "description": "Создание связи рыбы и пользователя",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Fishing"
+        ],
+        "summary": "",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": {
+              "errors": "forbidden"
+            }
+          },
+          "204": {
+            "description": ""
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "fish_id",
+            "in": "formData",
+            "description": "Id рыбы"
+          },
+          {
+            "type": "integer",
+            "required": true,
+            "name": "user_id",
+            "in": "formData",
+            "description": "Id пользователя"
+          }
+        ],
+        "operationId": "BehemothWeb.Api.V1.Fishing.FishAccountUserController.delete",
+        "description": "Удаление связи рыбы и пользователя",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ]
+      }
+    },
     "/api/v1/fishing/fishes": {
       "get": {
         "tags": [
@@ -285,21 +384,21 @@
             "type": "date",
             "required": false,
             "name": "user[first_name]",
-            "in": "query",
+            "in": "formData",
             "description": "Имя"
           },
           {
             "type": "date",
             "required": false,
             "name": "user[last_name]",
-            "in": "query",
+            "in": "formData",
             "description": "Фамилия"
           },
           {
             "type": "date",
             "required": false,
             "name": "user[birthday]",
-            "in": "query",
+            "in": "formData",
             "description": "Дата рождения"
           },
           {

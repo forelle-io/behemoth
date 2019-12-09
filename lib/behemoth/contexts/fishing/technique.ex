@@ -20,6 +20,7 @@ defmodule Behemoth.Contexts.Fishing.Technique do
   end
 
   def search_by_name_with_like_query(name) do
+    # TODO: Полнотекстовый поиск
     from t in Technique, where: ilike(t.name, ^"%#{name}%")
   end
 end

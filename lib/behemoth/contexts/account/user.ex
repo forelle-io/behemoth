@@ -5,6 +5,7 @@ defmodule Behemoth.Contexts.Account.User do
 
   import Ecto.Changeset
 
+  alias Behemoth.Contexts.Fishing.Fish
   alias Behemoth.Contexts.Geo.City
   alias Behemoth.Policies.Account.UserPolicy
 
@@ -20,6 +21,10 @@ defmodule Behemoth.Contexts.Account.User do
     timestamps()
 
     belongs_to :city, City
+
+    many_to_many :fishes, Fish,
+      join_through: "fishing.fishes_account_users",
+      on_replace: :delete
   end
 
   @doc false
