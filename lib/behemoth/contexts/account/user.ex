@@ -18,8 +18,6 @@ defmodule Behemoth.Contexts.Account.User do
     field :first_name, :string
     field :last_name, :string
 
-    field :fishes_ids, :any, virtual: true
-
     timestamps()
 
     belongs_to :city, City
@@ -46,9 +44,8 @@ defmodule Behemoth.Contexts.Account.User do
   @doc false
   def update_changeset(user, attrs) do
     user
-    |> cast(attrs, [:birthday, :gender, :first_name, :last_name, :city_id, :fishes_ids])
+    |> cast(attrs, [:birthday, :gender, :first_name, :last_name, :city_id])
     |> validate_required([:phone, :first_name, :last_name, :gender, :birthday])
     |> foreign_key_constraint(:city_id)
-    |> Fish.fishes_modify_changes()
   end
 end

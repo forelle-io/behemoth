@@ -52,6 +52,9 @@ defmodule BehemothWeb.Router do
         scope "/fishing", Fishing, as: :fishing do
           pipe_through :ensure_user_authenticated
 
+          post "/fishes_account_users", FishAccountUserController, :create
+          delete "/fishes_account_users", FishAccountUserController, :delete
+
           resources "/fishes", FishController, only: [:index]
           resources "/techniques", TechniqueController, only: [:index]
         end

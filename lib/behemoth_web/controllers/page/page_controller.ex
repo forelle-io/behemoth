@@ -7,6 +7,6 @@ defmodule BehemothWeb.PageController do
 
   @spec index(Conn.t(), map) :: Conn.t()
   def index(conn, _params) do
-    json(conn, %{application: application_name(), environment: Mix.env()})
+    json(conn, %{application: application_name()})
   end
 end
