@@ -13,16 +13,8 @@ defmodule BehemothWeb.Api.V1.Fishing.FishAccountUserController do
   action_fallback BehemothWeb.FallbackController
 
   def action(conn, _) do
-    action_name = action_name(conn)
-
-    args =
-      if action_name in [:delete] do
-        [conn, conn.params, Behemoth.Guardian.Plug.current_resource(conn, key: :user)]
-      else
-        [conn, conn.params]
-      end
-
-    apply(__MODULE__, action_name, args)
+    args = [conn, conn.params, Behemoth.Guardian.Plug.current_resource(conn, key: :user)]
+    apply(__MODULE__, action_name(conn), args)
   end
 
   swagger_path :create do
@@ -43,9 +35,10 @@ defmodule BehemothWeb.Api.V1.Fishing.FishAccountUserController do
     response(code(:unprocessable_entity), %{"errors" => %{"phone" => ["has already been taken"]}})
   end
 
-  @spec create(Conn.t(), map) :: Conn.t()
-  def create(conn, %{"fish_id" => _fish_id, "user_id" => _user_id} = params) do
-    with {:ok, %FishAccountUser{} = fish_account_user} <- Fishing.create_fish_account_user(params) do
+  @spec create(Conn.t(), map, %User{}) :: Conn.t()
+  def create(conn, %{"fish_id" => _fish_id, "user_id" => _user_id} = params, %User{} = current_user) do
+    with :ok <- Bodyguard.permit(FishAccountUser, :create, current_user, params),
+         {:ok, %FishAccountUser{} = fish_account_user} <- Fishing.create_fish_account_user(params) do
       conn
       |> put_status(:created)
       |> render("show.json", fish_account_user: fish_account_user)
