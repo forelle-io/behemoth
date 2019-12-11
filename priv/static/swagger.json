@@ -43,6 +43,105 @@
         "description": "Список городов с возможностью фильтрации"
       }
     },
+    "/api/v1/fishing/techniques_account_users": {
+      "post": {
+        "tags": [
+          "Fishing"
+        ],
+        "summary": "",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "422": {
+            "description": {
+              "errors": {
+                "phone": [
+                  "has already been taken"
+                ]
+              }
+            }
+          },
+          "201": {
+            "description": {
+              "data": {
+                "user": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "technique_id",
+            "in": "formData",
+            "description": "Id техники ловли"
+          },
+          {
+            "type": "integer",
+            "required": true,
+            "name": "user_id",
+            "in": "formData",
+            "description": "Id пользователя"
+          }
+        ],
+        "operationId": "BehemothWeb.Api.V1.Fishing.TechniqueAccountUserController.create",
+        "description": "Создание связи между техникой ловли и пользователем",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Fishing"
+        ],
+        "summary": "",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": {
+              "errors": "forbidden"
+            }
+          },
+          "204": {
+            "description": ""
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "technique_id",
+            "in": "formData",
+            "description": "Id техники ловли"
+          },
+          {
+            "type": "integer",
+            "required": true,
+            "name": "user_id",
+            "in": "formData",
+            "description": "Id пользователя"
+          }
+        ],
+        "operationId": "BehemothWeb.Api.V1.Fishing.TechniqueAccountUserController.delete",
+        "description": "Удаление связи между техникой ловли и пользователем",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ]
+      }
+    },
     "/api/v1/fishing/techniques": {
       "get": {
         "tags": [

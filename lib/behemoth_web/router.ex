@@ -55,6 +55,9 @@ defmodule BehemothWeb.Router do
           post "/fishes_account_users", FishAccountUserController, :create
           delete "/fishes_account_users", FishAccountUserController, :delete
 
+          post "/techniques_account_users", TechniqueAccountUserController, :create
+          delete "/techniques_account_users", TechniqueAccountUserController, :delete
+
           resources "/fishes", FishController, only: [:index]
           resources "/techniques", TechniqueController, only: [:index]
         end

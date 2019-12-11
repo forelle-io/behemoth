@@ -6,9 +6,15 @@ defmodule Behemoth.Contexts.Fishing.Technique do
   import Ecto.{Changeset, Query}
 
   alias __MODULE__
+  alias Behemoth.Contexts.Account.User
+  alias Behemoth.Contexts.Fishing.TechniqueAccountUser
 
   schema "fishing.techniques" do
     field :name, :string
+
+    many_to_many :users, User,
+      join_through: TechniqueAccountUser,
+      on_replace: :delete
   end
 
   @doc false
