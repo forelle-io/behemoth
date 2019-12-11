@@ -43,6 +43,119 @@
         "description": "Список городов с возможностью фильтрации"
       }
     },
+    "/api/v1/fishing/techniques_account_users": {
+      "post": {
+        "tags": [
+          "Fishing"
+        ],
+        "summary": "",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "422": {
+            "description": {
+              "errors": {
+                "technique_id": [
+                  "does not exist"
+                ]
+              }
+            }
+          },
+          "403": {
+            "description": {
+              "errors": "forbidden"
+            }
+          },
+          "401": {
+            "description": {
+              "errors": "unauthorized"
+            }
+          },
+          "201": {
+            "description": {
+              "data": {
+                "user_id": 1,
+                "technique_id": 1
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "technique_id",
+            "in": "formData",
+            "description": "Id техники ловли"
+          },
+          {
+            "type": "integer",
+            "required": true,
+            "name": "user_id",
+            "in": "formData",
+            "description": "Id пользователя"
+          }
+        ],
+        "operationId": "BehemothWeb.Api.V1.Fishing.TechniqueAccountUserController.create",
+        "description": "Создание связи между техникой ловли и пользователем",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Fishing"
+        ],
+        "summary": "",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "403": {
+            "description": {
+              "errors": "forbidden"
+            }
+          },
+          "401": {
+            "description": {
+              "errors": "unauthorized"
+            }
+          },
+          "204": {
+            "description": ""
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "technique_id",
+            "in": "formData",
+            "description": "Id техники ловли"
+          },
+          {
+            "type": "integer",
+            "required": true,
+            "name": "user_id",
+            "in": "formData",
+            "description": "Id пользователя"
+          }
+        ],
+        "operationId": "BehemothWeb.Api.V1.Fishing.TechniqueAccountUserController.delete",
+        "description": "Удаление связи между техникой ловли и пользователем",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ]
+      }
+    },
     "/api/v1/fishing/techniques": {
       "get": {
         "tags": [
@@ -93,18 +206,27 @@
           "422": {
             "description": {
               "errors": {
-                "phone": [
-                  "has already been taken"
+                "fish_id": [
+                  "does not exist"
                 ]
               }
+            }
+          },
+          "403": {
+            "description": {
+              "errors": "forbidden"
+            }
+          },
+          "401": {
+            "description": {
+              "errors": "unauthorized"
             }
           },
           "201": {
             "description": {
               "data": {
-                "user": {
-                  "$ref": "#/definitions/User"
-                }
+                "user_id": 1,
+                "fish_id": 1
               }
             }
           }
@@ -148,6 +270,11 @@
           "403": {
             "description": {
               "errors": "forbidden"
+            }
+          },
+          "401": {
+            "description": {
+              "errors": "unauthorized"
             }
           },
           "204": {
@@ -351,7 +478,7 @@
           },
           "403": {
             "description": {
-              "errors": "not authorized"
+              "errors": "forbidden"
             }
           },
           "401": {
@@ -467,6 +594,11 @@
           "403": {
             "description": {
               "errors": "forbidden"
+            }
+          },
+          "401": {
+            "description": {
+              "errors": "unauthorized"
             }
           },
           "204": {

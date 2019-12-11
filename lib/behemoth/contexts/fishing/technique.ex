@@ -6,9 +6,15 @@ defmodule Behemoth.Contexts.Fishing.Technique do
   import Ecto.{Changeset, Query}
 
   alias __MODULE__
+  alias Behemoth.Contexts.Account.User
+  alias Behemoth.Contexts.Fishing.TechniqueAccountUser
 
   schema "fishing.techniques" do
     field :name, :string
+
+    many_to_many :users, User,
+      join_through: TechniqueAccountUser,
+      on_replace: :delete
   end
 
   @doc false
@@ -21,6 +27,6 @@ defmodule Behemoth.Contexts.Fishing.Technique do
 
   def search_by_name_with_like_query(name) do
     # TODO: Полнотекстовый поиск
-    from t in Technique, where: ilike(t.name, ^"%#{name}%")
+    from ft in Technique, where: ilike(ft.name, ^"%#{name}%")
   end
 end

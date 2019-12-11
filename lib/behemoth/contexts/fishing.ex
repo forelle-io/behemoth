@@ -2,10 +2,9 @@ defmodule Behemoth.Contexts.Fishing do
   @moduledoc """
   Контекст Рыбной ловли
   """
-
   import Ecto.Query, warn: false
 
-  alias Behemoth.Contexts.Fishing.{Fish, FishAccountUser, Technique}
+  alias Behemoth.Contexts.Fishing.{Fish, FishAccountUser, Technique, TechniqueAccountUser}
   alias Behemoth.Repo
 
   def list_fishes, do: Repo.all(Fish)
@@ -101,6 +100,28 @@ defmodule Behemoth.Contexts.Fishing do
   def delete_fish_account_user(%{"user_id" => user_id, "fish_id" => fish_id}) do
     fish_id
     |> FishAccountUser.get_fish_account_user_query(user_id)
+    |> Repo.delete_all()
+  end
+
+  def create_technique_account_user(attrs \\ %{}) do
+    %TechniqueAccountUser{}
+    |> TechniqueAccountUser.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def get_technique_account_user(%{"user_id" => user_id, "technique_id" => technique_id}) do
+    case Repo.get_by(TechniqueAccountUser, user_id: user_id, technique_id: technique_id) do
+      %TechniqueAccountUser{} = technique_account_user ->
+        technique_account_user
+
+      nil ->
+        {:error, :not_found}
+    end
+  end
+
+  def delete_technique_account_user(%{"user_id" => user_id, "technique_id" => technique_id}) do
+    technique_id
+    |> TechniqueAccountUser.get_technique_account_user_query(user_id)
     |> Repo.delete_all()
   end
 end

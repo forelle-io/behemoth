@@ -1,4 +1,4 @@
-defmodule Behemoth.Repo.Migrations.CreateFishAccountUser do
+defmodule Behemoth.Repo.Migrations.CreateFishingFishesAccountUsers do
   use Ecto.Migration
 
   def change do

@@ -5,7 +5,7 @@ defmodule Behemoth.Contexts.Account.User do
 
   import Ecto.Changeset
 
-  alias Behemoth.Contexts.Fishing.Fish
+  alias Behemoth.Contexts.Fishing.{Fish, Technique}
   alias Behemoth.Contexts.Geo.City
   alias Behemoth.Policies.Account.UserPolicy
 
@@ -24,6 +24,10 @@ defmodule Behemoth.Contexts.Account.User do
 
     many_to_many :fishes, Fish,
       join_through: "fishing.fishes_account_users",
+      on_replace: :delete
+
+    many_to_many :techniques, Technique,
+      join_through: "fishing.techniques_account_users",
       on_replace: :delete
   end
 
