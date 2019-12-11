@@ -31,8 +31,10 @@ defmodule BehemothWeb.Api.V1.Fishing.TechniqueAccountUserController do
     parameter(:technique_id, :formData, :integer, "Id техники ловли", required: true)
     parameter(:user_id, :formData, :integer, "Id пользователя", required: true)
 
-    response(code(:created), %{"data" => %{"user" => Schema.ref(:User)}})
-    response(code(:unprocessable_entity), %{"errors" => %{"phone" => ["has already been taken"]}})
+    response(code(:created), %{"data" => %{"technique_id" => 1, "user_id" => 1}})
+    response(code(:unauthorized), %{"errors" => "unauthorized"})
+    response(code(:forbidden), %{"errors" => "forbidden"})
+    response(code(:unprocessable_entity), %{"errors" => %{"technique_id" => ["does not exist"]}})
   end
 
   @spec create(Conn.t(), map, %User{}) :: Conn.t()
@@ -57,7 +59,7 @@ defmodule BehemothWeb.Api.V1.Fishing.TechniqueAccountUserController do
     parameter(:user_id, :formData, :integer, "Id пользователя", required: true)
 
     response(code(:no_content), "")
-    response(code(:forbidden), %{"errors" => "not authorized"})
+    response(code(:unauthorized), %{"errors" => "unauthorized"})
     response(code(:forbidden), %{"errors" => "forbidden"})
   end
 

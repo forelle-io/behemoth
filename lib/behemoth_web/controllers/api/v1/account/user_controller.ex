@@ -90,9 +90,9 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     parameter(:"user[gender]", :formData, :integer, "Пол")
 
     response(code(:ok), %{"data" => %{"user" => Schema.ref(:User)}})
-    response(code(:forbidden), %{"errors" => "not authorized"})
-    response(code(:not_found), %{"errors" => "not found"})
     response(code(:unauthorized), %{"errors" => "unauthorized"})
+    response(code(:forbidden), %{"errors" => "forbidden"})
+    response(code(:not_found), %{"errors" => "not found"})
   end
 
   @spec update(Conn.t(), map, %User{}) :: Conn.t()
@@ -133,9 +133,9 @@ defmodule BehemothWeb.Api.V1.Account.UserController do
     parameter(:id, :path, :integer, "Id пользователя", required: true)
 
     response(code(:no_content), "")
-    response(code(:forbidden), %{"errors" => "not authorized"})
-    response(code(:not_found), %{"errors" => "not found"})
+    response(code(:unauthorized), %{"errors" => "unauthorized"})
     response(code(:forbidden), %{"errors" => "forbidden"})
+    response(code(:not_found), %{"errors" => "not found"})
   end
 
   @spec delete(Conn.t(), map, %User{}) :: Conn.t()

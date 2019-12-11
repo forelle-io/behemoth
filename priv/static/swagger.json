@@ -58,18 +58,27 @@
           "422": {
             "description": {
               "errors": {
-                "phone": [
-                  "has already been taken"
+                "technique_id": [
+                  "does not exist"
                 ]
               }
+            }
+          },
+          "403": {
+            "description": {
+              "errors": "forbidden"
+            }
+          },
+          "401": {
+            "description": {
+              "errors": "unauthorized"
             }
           },
           "201": {
             "description": {
               "data": {
-                "user": {
-                  "$ref": "#/definitions/User"
-                }
+                "user_id": 1,
+                "technique_id": 1
               }
             }
           }
@@ -113,6 +122,11 @@
           "403": {
             "description": {
               "errors": "forbidden"
+            }
+          },
+          "401": {
+            "description": {
+              "errors": "unauthorized"
             }
           },
           "204": {
@@ -192,18 +206,27 @@
           "422": {
             "description": {
               "errors": {
-                "phone": [
-                  "has already been taken"
+                "fish_id": [
+                  "does not exist"
                 ]
               }
+            }
+          },
+          "403": {
+            "description": {
+              "errors": "forbidden"
+            }
+          },
+          "401": {
+            "description": {
+              "errors": "unauthorized"
             }
           },
           "201": {
             "description": {
               "data": {
-                "user": {
-                  "$ref": "#/definitions/User"
-                }
+                "user_id": 1,
+                "fish_id": 1
               }
             }
           }
@@ -247,6 +270,11 @@
           "403": {
             "description": {
               "errors": "forbidden"
+            }
+          },
+          "401": {
+            "description": {
+              "errors": "unauthorized"
             }
           },
           "204": {
@@ -450,7 +478,7 @@
           },
           "403": {
             "description": {
-              "errors": "not authorized"
+              "errors": "forbidden"
             }
           },
           "401": {
@@ -566,6 +594,11 @@
           "403": {
             "description": {
               "errors": "forbidden"
+            }
+          },
+          "401": {
+            "description": {
+              "errors": "unauthorized"
             }
           },
           "204": {

@@ -124,5 +124,4 @@ defmodule Behemoth.Contexts.Fishing do
     |> TechniqueAccountUser.get_technique_account_user_query(user_id)
     |> Repo.delete_all()
   end
-
 end

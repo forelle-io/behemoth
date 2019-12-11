@@ -29,7 +29,7 @@ defmodule Behemoth.Contexts.Fishing.TechniqueAccountUser do
   end
 
   def get_technique_account_user_query(technique_id, user_id) do
-    from tau in TechniqueAccountUser,
-      where: tau.technique_id == ^technique_id and tau.user_id == ^user_id
+    from ftau in TechniqueAccountUser,
+      where: ftau.technique_id == ^technique_id and ftau.user_id == ^user_id
   end
 end

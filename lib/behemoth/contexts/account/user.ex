@@ -27,7 +27,7 @@ defmodule Behemoth.Contexts.Account.User do
       on_replace: :delete
 
     many_to_many :techniques, Technique,
-    join_through: "fishing.techniques_account_users",
+      join_through: "fishing.techniques_account_users",
       on_replace: :delete
   end
 

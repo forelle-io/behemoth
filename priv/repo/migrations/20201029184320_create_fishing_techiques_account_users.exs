@@ -1,4 +1,4 @@
-defmodule Behemoth.Repo.Migrations.CreateTechniqueAccountUser do
+defmodule Behemoth.Repo.Migrations.CreateFishingTechiquesAccountUsers do
   @moduledoc false
   use Ecto.Migration
 

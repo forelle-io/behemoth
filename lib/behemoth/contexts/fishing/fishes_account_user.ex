@@ -29,7 +29,7 @@ defmodule Behemoth.Contexts.Fishing.FishAccountUser do
   end
 
   def get_fish_account_user_query(fish_id, user_id) do
-    from fau in FishAccountUser,
-      where: fau.fish_id == ^fish_id and fau.user_id == ^user_id
+    from ffau in FishAccountUser,
+      where: ffau.fish_id == ^fish_id and ffau.user_id == ^user_id
   end
 end

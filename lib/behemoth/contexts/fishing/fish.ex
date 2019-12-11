@@ -27,6 +27,6 @@ defmodule Behemoth.Contexts.Fishing.Fish do
 
   def search_by_name_with_like_query(name) do
     # TODO: Полнотекстовый поиск
-    from f in Fish, where: ilike(f.name, ^"%#{name}%")
+    from ff in Fish, where: ilike(ff.name, ^"%#{name}%")
   end
 end
