@@ -13,7 +13,7 @@ defmodule BehemothWeb.Api.V1.Geo.CityController do
   swagger_path :index do
     get("/api/v1/geo/cities")
 
-    tag("Geo.City")
+    tag("Geo")
     description("Список городов с возможностью фильтрации")
 
     parameter(:name, :query, :string, "Наименование")
