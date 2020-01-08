@@ -49,7 +49,7 @@ defmodule Behemoth.Contexts.Account.User do
   def update_changeset(user, attrs) do
     user
     |> cast(attrs, [:birthday, :gender, :first_name, :last_name, :city_id])
-    |> validate_required([:phone, :first_name, :last_name, :gender, :birthday])
+    |> validate_required([:phone, :first_name, :last_name])
     |> foreign_key_constraint(:city_id)
   end
 end
