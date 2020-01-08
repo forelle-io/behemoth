@@ -50,7 +50,7 @@ defmodule Behemoth.Mixfile do
       # I18N
       {:gettext, "~> 0.11"},
       # Сервера
-      {:plug_cowboy, "~> 2.0"},
+      {:plug_cowboy, "~> 2.1.1"},
       # Протоколы, форматы
       {:csv, "~> 2.3"},
       {:decimal, "~> 1.8.0"},

@@ -11,10 +11,10 @@ config :behemoth,
 
 # Configures the endpoint
 config :behemoth, BehemothWeb.Endpoint,
-  url: [scheme: "https", port: 5001],
+  url: [scheme: "https", port: 4001],
   secret_key_base: "PIAJ+0L6UoL7aSHsLVxuX5j+RPHmCdpUZ3at+fGBKvh3WpMSk7VQAYW9lfdsqy+S",
   https: [
-    port: 5001,
+    port: 4001,
     cipher_suite: :strong,
     keyfile: "priv/cert/selfsigned_key.pem",
     certfile: "priv/cert/selfsigned.pem"
